@@ -1,0 +1,30 @@
+{% extends "master.html" %}
+
+{% block title %}
+My Tennis Club
+{% endblock %}
+
+{% block content %}
+{% comment %} {{ post_form.errors }} {% endcomment %}
+<h1>My Tennis Club</h1>
+
+    <h3>Booking</h3>
+
+    <form action="." method="post">
+        {% csrf_token %}
+        {{ booking_form.user.label}}: 
+        {{ booking_form.user }} <br>
+
+        <label>球場: </label>
+        {{ booking_form.court }} <br>
+
+        {{ booking_form.date.label}}: 
+        {{ booking_form.date }} <br>
+
+        {{ booking_form.reason.label}}: 
+        {{ booking_form.reason }} <br>
+        
+        <input type="submit" value="確定預約">
+    </form>
+
+{% endblock %}

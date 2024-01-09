@@ -1,0 +1,27 @@
+{% extends "master.html" %}
+
+{% block title %}
+  My Tennis Club - List of all members
+{% endblock %}
+
+
+{% block content %}
+
+<div class='container m-5'>
+
+  <h4 class='text-success'>會員</h4>
+  
+      <ul class="list-group">
+        {% for x in mymembers %}
+            {# if/else #}
+            {% if x.id == 3 or x.id == 6 %}
+            <li class="list-group-item  bg-transparent "><a class="m-5" href="details/{{ x.id }}">{{ x.lastname }}{{ x.firstname }}</a>, ({{ x.user }}) {{x.age}} 歲</li>
+            {% else %}
+            <li class="list-group-item  bg-transparent"><a href="details/{{ x.id }}">{{ x.lastname }}{{ x.firstname }}</a>, ({{ x.user }}) {{x.age}} 歲</li>
+            {% endif %}
+        {% endfor %}
+      </ul>
+
+</div>  
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "master.html" %}
+
+{% block title %}
+My Tennis Club
+{% endblock %}
+
+{% block content %}
+
+<p>
+{{ result }}
+
+{% if booking_form.errors %}
+<div style="color: red;">
+  {{ booking_form.errors }}
+</div>
+{% endif %}
+
+</p>
+
+{% endblock %}
