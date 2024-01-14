@@ -21,6 +21,8 @@ urlpatterns = [
     path('', include('members.urls')),
     path('courts/', include('courts.urls')),
     path('admin/', admin.site.urls),
+    path('Course_reservation/', include('Course_reservation.urls')),
+
 ]
 
 from django.conf.urls.static import static

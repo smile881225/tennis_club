@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'web',
     'members',
     'courts',
+    'Course_reservation'
 ]
 
 MIDDLEWARE = [
