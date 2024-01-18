@@ -33,7 +33,12 @@ class Course_reservation(models.Model):
     class_time_start=models.TimeField(null=True)
     class_time_end=models.TimeField(null=True)
     Classroom = models.CharField(max_length=255,null=True,help_text="教室")
-    Category = models.CharField(max_length=255,null=True,help_text="課程名稱")
+    Category_choices = [
+        ('基礎班', '基礎班'),
+        ('進階班', '進階班'),
+        ('大師班', '大師班'),
+    ]
+    Category = models.CharField(max_length=255,choices=Category_choices,null=True,help_text="課程名稱")
     Coach_name = models.CharField(max_length=255,null=True,help_text="教練名子")
     Full_number_applicants = models.IntegerField(default=26,null=True,help_text="總共可報名的人數")
     Current_number_applicants = models.IntegerField(default=0,null=True,help_text="目前報名人數")

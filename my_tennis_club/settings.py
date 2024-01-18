@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'web',
     'members',
     'courts',
-    'Course_reservation'
-
+    'Course_reservation',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
