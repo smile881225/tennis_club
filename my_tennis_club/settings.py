@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'members',
     'courts',
     'Course_reservation'
+
 ]
 
 MIDDLEWARE = [
@@ -67,6 +68,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+
         },
     },
 ]

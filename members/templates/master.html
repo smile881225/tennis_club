@@ -26,6 +26,7 @@
       <li class="nav-item">
         <a class="nav-link" href="/admin">ADMIN</a>
       </li>
+        {#登入按鈕判斷#}
       {% if user.is_authenticated %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Logout ({{ user }}) </a>
@@ -37,6 +38,9 @@
       {% endif %}
       <li class="nav-item">
         <a class="nav-link" href="/courts/bookings/">My bookings</a>
+      </li>
+     <li class="nav-item">
+        <a class="nav-link" href="/Course_reservation/">My Course Reservation</a>
       </li>
     </ul>
   </div>

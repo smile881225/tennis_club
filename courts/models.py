@@ -2,6 +2,7 @@ from django.db import models
 # User
 from django.contrib.auth.models import User
 # timezone
+from django.utils import timezone
 from datetime import date
 
 class Court(models.Model):  
@@ -32,7 +33,7 @@ class Booking(models.Model):
         與之相關的 Booking 也會跟著刪除
     '''
     user = models.ForeignKey(User, models.CASCADE)
-    date = models.DateField(default = date.today())
+    date = models.DateTimeField(default=timezone.now)
 
     reason = models.CharField(max_length=200, blank=True)
 
