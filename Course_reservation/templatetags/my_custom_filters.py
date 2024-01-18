@@ -16,3 +16,8 @@ def week(v1):
     }
     return chinese_numbers[v1]
 
+@register.filter(name='divisibleby')
+def divisibleby(v1):
+    v1=v1%5
+
+    return v1
