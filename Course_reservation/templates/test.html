@@ -11,26 +11,10 @@
     <div class="container-fluid p-5 pt-3">
         <h3 class="text-success">課程查詢</h3>
 
-        <form class="d-flex justify-content-start align-items-center">
-            期別：
-            {% for Period in Period_list %}
-                {#                {{ Course_reservation.Period }}；#}
-                <input class="m-1" type="radio" id={{ Period }} name="Period_list"
-                       value={{ Period }}>
-                <label for={{ Period }}>{{ Period }} </label>
-            {% endfor %}
-            {#            <input type="submit" value="提交">#}
-        </form>
 
-        <div class="Category">課程名稱：</div>
-        <div class="Time_period">時段：</div>
-        <div class="Course_code">課程代碼：</div>
-        <div class="Class_status">顏色說明：</div>
-        <br>
 
         <table class="table table-striped table-bordered">
             <tr>
-                <th> 時段</th>
                 <th> 星期一</th>
                 <th> 星期二</th>
                 <th> 星期三</th>
@@ -39,7 +23,6 @@
                 <th> 星期六</th>
                 <th> 星期日</th>
             </tr>
-            <td width="9%" rowspan="5">这个单元格横跨三列</td>
             <tr>
                 <td width="10%" class="p-0">
                     <table class="table">
