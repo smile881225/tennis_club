@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Course_reservation
 from .filters import Course_reservation_Filter
+from django.contrib import messages
 
 
 def index(request):
@@ -23,7 +24,7 @@ def index(request):
         course_reservation_Filter = Course_reservation_Filter(request.POST, queryset=Course_reservation_list)
 
     context = {
-        'Course_reservation_list':Course_reservation_list,
+        'Course_reservation_list': Course_reservation_list,
         'course_reservation_Filter': course_reservation_Filter,
         'Period_list': Period_list,
         'Course_code_list': Course_code_list,
@@ -35,4 +36,14 @@ def index(request):
 
 def test_2(request):
     template = loader.get_template('test-2.html')
+    return HttpResponse(template.render())
+
+
+def Course_content(request):
+    template = loader.get_template('Course_content.html')
+    try:
+        urid = request.GET['user_id']
+        urpass = request.GET['user_pass']
+    except:
+        urid = None
     return HttpResponse(template.render())

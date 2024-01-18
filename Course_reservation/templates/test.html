@@ -41,27 +41,27 @@
             </tbody>
         </table>
 
-{##}
-{#        <form class="d-flex justify-content-start align-items-center">#}
-{#            期別：#}
-{#            {% for Period in Period_list %}#}
-                {#                {{ Course_reservation.Period }}；#}
-{#                <input class="m-1" type="radio" id={{ Period }} name="Period_list"#}
-{#                       value={{ Period }}>#}
-{#                <label for={{ Period }}>{{ Period }} </label>#}
-{#            {% endfor %}#}
-            {#            <input type="submit" value="提交">#}
-{#        </form>#}
+        {##}
+        {#        <form class="d-flex justify-content-start align-items-center">#}
+        {#            期別：#}
+        {#            {% for Period in Period_list %}#}
+        {#                {{ Course_reservation.Period }}；#}
+        {#                <input class="m-1" type="radio" id={{ Period }} name="Period_list"#}
+        {#                       value={{ Period }}>#}
+        {#                <label for={{ Period }}>{{ Period }} </label>#}
+        {#            {% endfor %}#}
+        {#            <input type="submit" value="提交">#}
+        {#        </form>#}
 
-{#        <div class="Category">課程名稱：</div>#}
-{#        <div class="Time_period">時段：</div>#}
-{#        <div class="Course_code">課程代碼：</div>#}
-{#        <div class="Class_status">顏色說明：</div>#}
+        {#        <div class="Category">課程名稱：</div>#}
+        {#        <div class="Time_period">時段：</div>#}
+        {#        <div class="Course_code">課程代碼：</div>#}
+        {#        <div class="Class_status">顏色說明：</div>#}
         <br>
 
         <table class="table table-striped table-bordered">
             <tr>
-{#                <th> 時段</th>#}
+                {#                <th> 時段</th>#}
                 <th> 星期一</th>
                 <th> 星期二</th>
                 <th> 星期三</th>
@@ -70,29 +70,33 @@
                 <th> 星期六</th>
                 <th> 星期日</th>
             </tr>
-{#            <td width="9%" rowspan="5">这个单元格横跨三列</td>#}
+            {#            <td width="9%" rowspan="5">这个单元格横跨三列</td>#}
             <tr>
                 <td width="10%" class="p-0">
                     <table class="table">
                         {% for Course_reservation in Course_reservation_list %}
                             <tr>
-                                {% if Course_reservation.week == "星期一" %}
-                                    <td>
-                                        期別：{{ Course_reservation.Period }}<br>
-                                        授課教師：{{ Course_reservation.Coach_name }}<br>
-                                        課程名稱：{{ Course_reservation.Category }} <br>
-                                        課程代碼：{{ Course_reservation.Course_code }} <br>
-                                        授課教室：{{ Course_reservation.Classroom }} <br>
-                                        {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                        {{ Course_reservation.Time_start | week }}<br>
-                                        {{ Course_reservation.class_time_start }}~
-                                        {{ Course_reservation.class_time_end }}
-                                        <br>
-                                        滿班人數：{{ Course_reservation.Full_number_applicants }}人 <br>
-                                        目前報名人數：{{ Course_reservation.Current_number_applicants }}人 <br>
-                                        課程內容（按鈕） <br>
-                                    </td>
-                                {% endif %}
+                                <form name='my form' action='Course_content/' method='GET'>
+                                    {% if Course_reservation.week == "星期一" %}
+                                        <td>
+                                            期別：{{ Course_reservation.Period }}<br>
+                                            授課教師：{{ Course_reservation.Coach_name }}<br>
+                                            課程名稱：{{ Course_reservation.Category }} <br>
+                                            課程代碼：{{ Course_reservation.Course_code }} <br>
+                                            授課教室：{{ Course_reservation.Classroom }} <br>
+                                            {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
+                                            {{ Course_reservation.Time_start | week }}<br>
+                                            {{ Course_reservation.class_time_start }}~
+                                            {{ Course_reservation.class_time_end }}
+                                            <br>
+                                            滿班人數：{{ Course_reservation.Full_number_applicants }}人 <br>
+                                            目前報名人數：{{ Course_reservation.Current_number_applicants }}人 <br>
+                                            <a class="nav-link btn btn-light" href="Course_content/">課程內容</a>
+{#                                            <input class="nav-link btn btn-light" type='submit' value='課程內容'>#}
+                                            <br>
+                                        </td>
+                                    {% endif %}
+                                </form>
                             </tr>
                         {% endfor %}
                     </table>
@@ -251,5 +255,7 @@
         </table>
 
     </div>
+
+
 
 {% endblock %}
