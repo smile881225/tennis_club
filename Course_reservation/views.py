@@ -47,3 +47,13 @@ def Course_content(request):
     except:
         urid = None
     return HttpResponse(template.render())
+
+def first_stage(request):
+    template = loader.get_template('first_stage.html')
+    return HttpResponse(template.render())
+def second_stage(request):
+    template = loader.get_template('second_stage.html')
+    return HttpResponse(template.render())
+def third_stage(request):
+    template = loader.get_template('third_stage.html')
+    return HttpResponse(template.render())
