@@ -1,5 +1,5 @@
 指令
-> cd venv\Scripts\activate.bat
+> venv\Scripts\activate.bat
 > py manage.py runserver
 # version bind_user
 
