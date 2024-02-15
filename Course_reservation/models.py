@@ -42,7 +42,7 @@ class Course_reservation(models.Model):
     Coach_name = models.CharField(max_length=255,null=True,help_text="教練名子")
     Full_number_applicants = models.IntegerField(default=26,null=True,help_text="總共可報名的人數")
     Current_number_applicants = models.IntegerField(default=0,null=True,help_text="目前報名人數")
-    Class_status = models.CharField(max_length=255,null=True,help_text="班級狀態，尚未達開班人數、已達開班人數、停開、僅現場報名")
+    Class_status = models.CharField(max_length=255,null=True,help_text="班級狀態，報名中、開班中、報名已滿、停開、僅現場報名")
 
     # 如果單純呼叫，就會回傳下面資料，django格式
     def __str__(self):
