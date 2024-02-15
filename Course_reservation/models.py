@@ -47,3 +47,11 @@ class Course_reservation(models.Model):
     # 如果單純呼叫，就會回傳下面資料，django格式
     def __str__(self):
         return f"{self.Period} {self.Course_code}"
+    
+    
+    
+class Course_reservation_history(models.Model):
+    Period = models.CharField(max_length=255,null=True,help_text="期別")
+    Course_code = models.CharField(max_length=255,null=True,help_text="課程代碼")
+    Student_id = models.CharField(max_length=255,null=True,help_text="學生帳號")
+    Create_time = models.DateTimeField(auto_now_add=True,help_text="建立時間")

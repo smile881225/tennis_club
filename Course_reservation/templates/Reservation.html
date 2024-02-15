@@ -1,0 +1,28 @@
+{% extends "master.html" %}
+
+{% block title %}
+My Tennis Club - List of all members
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid p-5 pt-3">
+    <h3 class="text-success">已預約課程</h3>
+    <td width="10%" class="p-0">
+        <table class="table">
+            {% for Course_reservation in Course %}
+            <tr>
+                <td>
+                    期別：{{ Course_reservation.Period }}<br>
+                    課程代碼：{{ Course_reservation.Course_code }}<br>
+                    預約人：{{ Course_reservation.Student_id }}<br>
+                    登記時間：{{ Course_reservation.Create_time }}<br>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </td>
+</div>
+
+
+{% endblock %}

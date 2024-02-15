@@ -4,10 +4,10 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from .models import Course_reservation
+from .models import Course_reservation , Course_reservation_history
 from .filters import Course_reservation_Filter
 from django.contrib import messages
-
+from django.shortcuts import redirect
 
 def index(request):
     template = loader.get_template('test.html')
@@ -41,12 +41,29 @@ def test_2(request):
 
 def Course_content(request):
     template = loader.get_template('Course_content.html')
+    data = {}
+    print(request.GET.get('code'))
+    if not  request.user.is_authenticated:
+        print(request.user)
+        return redirect('/login/')
     try:
-        urid = request.GET['user_id']
-        urpass = request.GET['user_pass']
+        # urid = request.GET['user_id']
+        # urpass = request.GET['user_pass']
+        code = request.GET.get('code')
+        print(code)
+        data = Course_reservation.objects.filter(Course_code=code)
+        for i in data :
+            print(i)
+        context = {
+        "Course" : data
+            }
+        return HttpResponse(template.render(context))
     except:
         urid = None
-    return HttpResponse(template.render())
+        context = {
+        "Course" : data
+            }
+        return HttpResponse(template.render(context))
 
 def first_stage(request):
     template = loader.get_template('first_stage.html')
@@ -57,3 +74,33 @@ def second_stage(request):
 def third_stage(request):
     template = loader.get_template('third_stage.html')
     return HttpResponse(template.render())
+
+
+def CourseReservation(request):
+    template = loader.get_template('Reservation.html')
+    data = {}
+    print("Course_reservation")
+    print(request.GET.get('code'))
+    try:
+        code = request.GET.get('code')
+        data = Course_reservation.objects.filter(Course_code=code).first()
+        haveReservation = Course_reservation_history.objects.filter(Student_id=request.user,Course_code=code ).exists()
+        
+        if not haveReservation :
+            new_reservation = Course_reservation_history(
+                    Period= f"{data.Period}_{data.Category}",
+                    Course_code=data.Course_code,
+                    Student_id=request.user
+                )
+            new_reservation.save()
+        reservationData = Course_reservation_history.objects.filter(Student_id=request.user)
+        context = {
+        "Course" : reservationData
+            }
+        return HttpResponse(template.render(context))
+    except:
+        urid = None
+        context = {
+        "Course" : reservationData
+            }
+        return HttpResponse(template.render(context))
