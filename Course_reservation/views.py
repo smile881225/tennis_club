@@ -79,28 +79,26 @@ def third_stage(request):
 def CourseReservation(request):
     template = loader.get_template('Reservation.html')
     data = {}
-    print("Course_reservation")
-    print(request.GET.get('code'))
     try:
         code = request.GET.get('code')
         data = Course_reservation.objects.filter(Course_code=code).first()
-        haveReservation = Course_reservation_history.objects.filter(Student_id=request.user,Course_code=code ).exists()
-        
-        if not haveReservation :
+        haveReservation = Course_reservation_history.objects.filter(Student_id=request.user, Course_code=code).exists()
+
+        if not haveReservation:
             new_reservation = Course_reservation_history(
-                    Period= f"{data.Period}_{data.Category}",
-                    Course_code=data.Course_code,
-                    Student_id=request.user
-                )
+                Period=f"{data.Period}_{data.Category}",
+                Course_code=data.Course_code,
+                Student_id=request.user
+            )
             new_reservation.save()
         reservationData = Course_reservation_history.objects.filter(Student_id=request.user)
         context = {
-        "Course" : reservationData
-            }
+            "Course": reservationData
+        }
         return HttpResponse(template.render(context))
     except:
-        urid = None
+        reservationData = Course_reservation_history.objects.filter(Student_id=request.user)
         context = {
-        "Course" : reservationData
-            }
+            "Course": reservationData
+        }
         return HttpResponse(template.render(context))
