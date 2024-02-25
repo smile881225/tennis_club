@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 
 def index(request):
-    template = loader.get_template('test.html')
+    template = loader.get_template('Course_reservation.html')
     Course_reservation_list = Course_reservation.objects.all()
     # 使用 distinct() 方法查询所有不重复的商品名称
     Period_list = Course_reservation.objects.values_list('Period', flat=True).distinct()
@@ -88,6 +88,7 @@ def CourseReservation(request):
             new_reservation = Course_reservation_history(
                 Period=f"{data.Period}_{data.Category}",
                 Course_code=data.Course_code,
+                Coach_name=data.Coach_name,
                 Student_id=request.user
             )
             new_reservation.save()

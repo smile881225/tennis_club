@@ -53,5 +53,6 @@ class Course_reservation(models.Model):
 class Course_reservation_history(models.Model):
     Period = models.CharField(max_length=255,null=True,help_text="期別")
     Course_code = models.CharField(max_length=255,null=True,help_text="課程代碼")
+    Coach_name= models.CharField(max_length=255,null=True,help_text="教練名子")
     Student_id = models.CharField(max_length=255,null=True,help_text="學生帳號")
     Create_time = models.DateTimeField(auto_now_add=True,help_text="建立時間")
