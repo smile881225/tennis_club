@@ -56,3 +56,7 @@ class Course_reservation_history(models.Model):
     Coach_name= models.CharField(max_length=255,null=True,help_text="教練名子")
     Student_id = models.CharField(max_length=255,null=True,help_text="學生帳號")
     Create_time = models.DateTimeField(auto_now_add=True,help_text="建立時間")
+    State =models.CharField(max_length=255,null=True,help_text="預約狀態，完成預約、已取消")
+
+
+
