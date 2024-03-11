@@ -29,9 +29,11 @@ My Tennis Club - List of all members
                     目前報名人數：{{ Course_reservation.Current_number_applicants }}人
                     <br>
 {#                    <a class="mt-2 nav-link btn btn-light"#}
-                     <a class="mt-2 btn btn-light btn-sm px-2 gap-3"
+                     <a class="mt-2 btn btn-light btn-sm px-2 gap-3" style="opacity: 0.5;"
+{#                     <a class="mt-2 btn btn-sm px-2 gap-3 btn-primary"#}
                         href="/Course_reservation/">返回</a>
-                    <a class="mt-2 btn btn-light btn-sm px-2 gap-3"
+                    <a class="mt-2 btn btn-sm px-2 gap-3 btn-primary"
+{#                    <a class="mt-2 btn btn-light btn-sm px-2 gap-3" style="opacity: 0.5;"#}
                         href="Coursereservation?code={{ Course_reservation.Course_code }}">預約</a>
 {#                                            <input class="nav-link btn btn-light" type='submit' value='預約'>#}
                 </td>
@@ -39,7 +41,7 @@ My Tennis Club - List of all members
             {% endfor %}
         </table>
     </td>
-</div>   
+</div>
 
 
 {% endblock %}

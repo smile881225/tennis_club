@@ -49,3 +49,8 @@ def logout(request):
     main_html = loader.get_template('main.html')
     context = {'user': request.user}
     return HttpResponse(main_html.render(context, request))
+
+def signin(request):
+    login_page = loader.get_template('signin.html')
+    context = {}
+    return HttpResponse(login_page.render(context, request))

@@ -1,0 +1,46 @@
+{% extends "master.html" %}
+
+{% block title %}
+    My Tennis Club
+{% endblock %}
+
+{% block content %}
+
+{% comment %} login fail, show msg {% endcomment %}
+{#{% if err_login_msg %}#}
+{#    <div class="alert alert-danger">#}
+{#    <strong>Error:</strong>#}
+{#    {{ err_login_msg }}#}
+{#    </div>#}
+{#{% endif %}    #}
+
+<div class="container mt-2">
+    <div class='row col-md-4'>
+        {#        <h2 class='text-success'>Login</h2>#}
+        <h2 class='text-success'>註冊</h2>
+        <form action="." method="post">
+            {% csrf_token %}
+            <div class='mb-3 mt-3'>
+                <label for="name">帳號</label><br>
+               <input type="text" id="name" name="name"><br>
+            </div>
+
+            <div class='mb-3 mt-3'>
+                <label for="name">密碼</label><br>
+               <input type="text" id="name" name="name"><br>
+            </div>
+
+             <div class='mb-3 mt-3'>
+                <label for="name">確認密碼</label><br>
+               <input type="text" id="name" name="name"><br>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">建立帳號</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
