@@ -42,19 +42,27 @@
             <a class="nav-link" href="{% url 'login' %}">登入</a>
         </li>
       {% endif %}
-      <li class="nav-item">
-{#        <a class="nav-link" href="/courts/bookings/">My bookings</a>#}
-        <a class="nav-link" href="/courts/bookings/">場地預約紀錄</a>
-      </li>
+
      <li class="nav-item">
 {#        <a class="nav-link" href="/Course_reservation/">My Course Reservation</a>#}
-        <a class="nav-link" href="/Course_reservation/">課程預約</a>
+        <a class="nav-link" href="/Course_reservation/">課程總攬</a>
       </li>
+
+     <li class="nav-item">
+{#        <a class="nav-link" href="/Course_reservation/">My Course Reservation</a>#}
+        <a class="nav-link" href="/Course_reservation/Course_search/">課程搜尋</a>
+      {% comment %} </li>
+
 
         <li class="nav-item">
 {#                   <a class="nav-link" href="/Course_reservation/Coursereservation">Course Reservation History</a>#}
                    <a class="nav-link" href="/Course_reservation/Coursereservation">課程預約紀錄</a>
         </li>
+    <li class="nav-item">
+{#        <a class="nav-link" href="/courts/bookings/">My bookings</a>#}
+        <a class="nav-link" href="/courts/bookings/">場地預約紀錄</a>
+      </li> {% endcomment %}
+
     </ul>
   </div>
 

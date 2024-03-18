@@ -14,7 +14,7 @@
                                 <td>
                                     期別：{{ Course_reservation.Period }}<br>
                                     授課教師：{{ Course_reservation.Coach_name }}<br>
-                                    課程名稱：{{ Course_reservation.Category }} <br>
+                                    課程等級：{{ Course_reservation.Category }} <br>
                                     課程代碼：{{ Course_reservation.Course_code }} <br>
                                     授課教室：{{ Course_reservation.Classroom }} <br>
                                     {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
@@ -25,7 +25,7 @@
                                     滿班人數：{{ Course_reservation.Full_number_applicants }}人 <br>
                                     目前報名人數：{{ Course_reservation.Current_number_applicants }}人 <br>
                                     <a class="mt-2 btn btn-light btn-sm px-2 gap-3"
-                                       href="Course_content?code={{ Course_reservation.Course_code }}"">預約課程</a>
+                                       href="/Course_reservation/Course_content?code={{ Course_reservation.Course_code }}">預約課程</a>
                                     {#                                            <input class="nav-link btn btn-light" type='submit' value='預約課程'>#}
                                     <br>
                                 </td>

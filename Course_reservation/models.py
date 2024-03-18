@@ -38,11 +38,19 @@ class Course_reservation(models.Model):
         ('進階班', '進階班'),
         ('大師班', '大師班'),
     ]
-    Category = models.CharField(max_length=255,choices=Category_choices,null=True,help_text="課程名稱")
+    Category = models.CharField(max_length=255,choices=Category_choices,null=True,help_text="課程等級")
     Coach_name = models.CharField(max_length=255,null=True,help_text="教練名子")
     Full_number_applicants = models.IntegerField(default=26,null=True,help_text="總共可報名的人數")
     Current_number_applicants = models.IntegerField(default=0,null=True,help_text="目前報名人數")
-    Class_status = models.CharField(max_length=255,null=True,help_text="班級狀態，報名中、開班中、報名已滿、停開、僅現場報名")
+    Class_status_choices = [
+        ('報名中', '報名中'),
+        ('開班中', '開班中'),
+        ('報名已滿', '報名已滿'),
+        ('停開', '停開'),
+        ('僅現場報名', '僅現場報名'),
+    ]
+
+    Class_status = models.CharField(max_length=255,choices=Class_status_choices,null=True,help_text="班級狀態，報名中、開班中、報名已滿、停開、僅現場報名")
 
     # 如果單純呼叫，就會回傳下面資料，django格式
     def __str__(self):

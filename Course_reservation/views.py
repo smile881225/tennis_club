@@ -131,7 +131,7 @@ def CourseReservation(request):
                 # 課程人數+1
                 CourseData.Current_number_applicants = CourseData.Current_number_applicants + 1
                 CourseData.save()
-                msg = "重新預約完成"
+                msg = "預約完成"
 
             else :
                 historyData.State = "已取消"
@@ -158,3 +158,28 @@ def CourseReservation(request):
             "msg": msg
         }
         return HttpResponse(template.render(context))
+
+def Course_search(request):
+    template = loader.get_template('Course_search.html')
+    Course_reservation_list = Course_reservation.objects.all()
+    # 使用 distinct() 方法查询所有不重复的商品名称
+    Period_list = Course_reservation.objects.values_list('Period', flat=True).distinct()
+    Course_code_list = Course_reservation.objects.values_list('Course_code', flat=True).distinct()
+    Category_list = Course_reservation.objects.values_list('Category', flat=True).distinct()
+
+    # 過濾用
+    course_reservation_Filter = Course_reservation_Filter(queryset=Course_reservation_list)
+
+    if request.method == "POST":
+        course_reservation_Filter = Course_reservation_Filter(request.POST, queryset=Course_reservation_list)
+
+    context = {
+        'Course_reservation_list': Course_reservation_list,
+        'course_reservation_Filter': course_reservation_Filter,
+        'Period_list': Period_list,
+        'Course_code_list': Course_code_list,
+        'Category_list': Category_list,
+    }
+
+    return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render())

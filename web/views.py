@@ -6,6 +6,7 @@ from django.contrib import auth
 from django.shortcuts import render
 
 from web.forms import LoginForm
+# from web.forms import signinForm
 
 def login(request):
     ''' 登入 '''
@@ -50,7 +51,26 @@ def logout(request):
     context = {'user': request.user}
     return HttpResponse(main_html.render(context, request))
 
-def signin(request):
-    login_page = loader.get_template('signin.html')
-    context = {}
-    return HttpResponse(login_page.render(context, request))
+# def signin(request):
+# 註冊，沒有寫完
+#     login_page = loader.get_template('signin.html')
+#     if request.method == 'POST':
+#         login_form = signinForm(request.POST)
+#         if login_form.is_valid():
+#             username = login_form.cleaned_data['username']
+#             password = login_form.cleaned_data['password']
+#             user = authenticate(username=username, password=password)
+#             if user is not None:
+#                 auth.login(request, user)
+#                 main_page = loader.get_template('main.html')
+#                 context = {'user': request.user,
+#                            'message': 'login ok'}
+#                 return render(request, 'main.html', context)
+#     data = {}
+#
+#     username = request.GET.get('username')
+#     password = request.GET.get('password')
+#
+#     context = {}
+#     return HttpResponse(login_page.render(context, request))
+

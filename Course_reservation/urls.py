@@ -8,5 +8,6 @@ urlpatterns = [
     path('second_stage/', views.Course_content, name='second_stage'),
     path('third_stage/', views.Course_content, name='third_stage'),
     path('', views.index, name='index'),
-    path('Coursereservation', views.CourseReservation, name='CourseReservation')
+    path('Coursereservation/', views.CourseReservation, name='CourseReservation'),
+    path('Course_search/', views.Course_search, name='Course_search')
 ]

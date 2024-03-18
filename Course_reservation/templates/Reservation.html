@@ -20,7 +20,7 @@
                             登記時間：{{ Course_reservation.Create_time }}<br>
                             預約狀態：{{ Course_reservation.State }}<br>
                             <a class="mt-2 btn btn-light btn-sm px-2 gap-3"
-                               href="Coursereservation?code={{ Course_reservation.Course_code }}&cancel=True">取消預約</a>
+                               href="/Course_reservation/Coursereservation?code={{ Course_reservation.Course_code }}&cancel=True">取消預約</a>
                         </td>
                     </tr>
                 {% endfor %}
