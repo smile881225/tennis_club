@@ -86,7 +86,7 @@ def third_stage(request):
 def CourseReservation(request):
     template = loader.get_template('Reservation.html')
     data = {}
-    # msg = ""
+    msg = ""
     cancel = False
     try:
         # 從 A 標籤的url拿到 code
@@ -99,12 +99,12 @@ def CourseReservation(request):
         # 篩選課程資料表裡的第一筆資料
         CourseData = Course_reservation.objects.filter(Course_code=code).first()
         if  (CourseData.Current_number_applicants >= CourseData.Full_number_applicants) and  cancel != "True"  :
-            reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="Appointment Confirmed")
+            reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="完成預約")
             context = {
                 "Course": reservationData,
-                # "msg" : "Appointment Limit Reached"
+                "msg" : "預約已達上限"
             }
-            # print(context["msg"])
+            print(context["msg"])
             return HttpResponse(template.render(context))
         # 篩選歷史資料表裡的資料，用於確認有沒有預約過
         haveReservation = Course_reservation_history.objects.filter(Student_id=request.user, Course_code=code).exists()
@@ -116,46 +116,45 @@ def CourseReservation(request):
                 Period=f"{CourseData.Period}_{CourseData.Category}",
                 Course_code=CourseData.Course_code,
                 Coach_name=CourseData.Coach_name,
-                Student_id=request.user,
-                State = "Appointment Confirmed"
+                Student_id=request.user
             )
             # 儲存
             new_reservation.save()
-            # msg = "Appointment Confirmed"
+            msg = "預約完成"
         else:
             historyData = Course_reservation_history.objects.filter(Student_id=request.user, Course_code=code).first()
 
-            if historyData.State == "Appointment Confirmed":
-                historyData.State = "Cancelled"
+            if historyData.State == "完成預約":
+                historyData.State = "已取消"
                 historyData.save()
                 # 課程人數-1
                 CourseData.Current_number_applicants = CourseData.Current_number_applicants - 1
                 CourseData.save()
-                # msg = "Cancelled"
-            else:
-                historyData.State = "Appointment Confirmed"
+                msg = "取消預約完成"
+            else :
+                historyData.State = "完成預約"
                 historyData.save()
                 # 課程人數+1
                 CourseData.Current_number_applicants = CourseData.Current_number_applicants + 1
                 CourseData.save()
-                # msg = "Appointment Confirmed"
+                msg = "預約完成"
 
 
         # 篩選有完成預約的人
-        reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="Appointment Confirmed")
+        reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="完成預約")
 
         # 篩選完放到context裡面
         context = {
             "Course": reservationData,
-            # "msg": msg
+            "msg": msg
         }
         return HttpResponse(template.render(context))
 
     except:
-        reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="Appointment Confirmed")
+        reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="完成預約")
         context = {
             "Course": reservationData,
-            # "msg": msg
+            "msg": msg
         }
         return HttpResponse(template.render(context))
 

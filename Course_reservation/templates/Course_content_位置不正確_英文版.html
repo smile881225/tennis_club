@@ -7,36 +7,36 @@
 {% block content %}
 
     <div class="container-fluid p-5 pt-3">
-        <h3 class="text-success">課程內容確認</h3>
+        <h3 class="text-success">Course Content check</h3>
         <td width="10%" class="p-0">
             <table class="table">
                 {% for Course_reservation in Course %}
                     <tr>
                         <td>
-                            期別：{{ Course_reservation.Period }}<br>
-                            授課教師：{{ Course_reservation.Coach_name }}<br>
-                            課程等級：{{ Course_reservation.Category }}
+                            Session：{{ Course_reservation.Period }}<br>
+                            Coach：{{ Course_reservation.Coach_name }}<br>
+                            Level：{{ Course_reservation.Category }}
                             <br>
-                            課程代碼：{{ Course_reservation.Course_code }}
+                            Code：{{ Course_reservation.Course_code }}
                             <br>
-                            授課教室：{{ Course_reservation.Classroom }}
+                            Classroom：{{ Course_reservation.Classroom }}
                             <br>
                             {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
 
                             <br>
-                            滿班人數：{{ Course_reservation.Full_number_applicants }}人
+                            Maximum Class Size：{{ Course_reservation.Full_number_applicants }}
                             <br>
-                            目前報名人數：{{ Course_reservation.Current_number_applicants }}人
+                            Current Enrollment：{{ Course_reservation.Current_number_applicants }}
                             <br>
                             {#                    <a class="mt-2 nav-link btn btn-light"#}
 
                             <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 btn btn-sm px-2 gap-3 btn-primary"
                                     {#                    <a class="mt-2 btn btn-light btn-sm px-2 gap-3" style="opacity: 0.5;"#}
-                               href="Coursereservation?code={{ Course_reservation.Course_code }}">預約</a>
-                            {#                                            <input class="nav-link btn btn-light" type='submit' value='預約'>#}
+                               href="Coursereservation?code={{ Course_reservation.Course_code }}">Confirm</a>
+                            {#                                            <input class="nav-link btn btn-light" type='submit' value='Reservation'>#}
                             <a class="mt-2 btn btn-light btn-sm px-2 gap-3" style="opacity: 0.5;"
                                     {#                     <a class="mt-2 btn btn-sm px-2 gap-3 btn-primary"#}
-                               href="/Course_reservation/">返回</a>
+                               href="/Course_reservation/">Return</a>
                         </td>
 
                     </tr>

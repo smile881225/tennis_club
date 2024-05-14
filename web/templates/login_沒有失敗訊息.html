@@ -6,13 +6,6 @@ My Tennis Club
 
 {% block content %}
 
-{% comment %} login fail, show msg {% endcomment %}
-{% if err_login_msg %}
-    <div class="alert alert-danger">
-    <strong>Error:</strong>
-    {{ err_login_msg }}
-    </div>
-{% endif %}
 
 <div class="container mt-2">
     <div class='row col-md-4'>
@@ -24,7 +17,7 @@ My Tennis Club
             <form action="." method="post">
                 {% csrf_token %}
                 <div class='mb-3 mt-3'>
-                      <label for="username" id="Username" class='form-label'>Username: </label>
+                    <label for="username" id="Username" class='form-label'>Username: </label>
 {#                    <label for="username" class='form-label'>帳號： </label>#}
                     {{ login_form.username }}
                 </div>

@@ -16,10 +16,11 @@
                             Session：{{ Course_reservation.Period }}<br>
                             Code：{{ Course_reservation.Course_code }}<br>
                             Coach：{{ Course_reservation.Coach_name }}<br>
+                            Appointee：{{ Course_reservation.Student_id }}<br>
                             Registration Time：{{ Course_reservation.Create_time }}<br>
                             Reservation Status：{{ Course_reservation.State }}<br>
-                            <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 btn btn-light btn-sm px-2 gap-3"
-                               href="/Course_reservation/Coursereservation?code={{ Course_reservation.Course_code }}&cancel=True">Cancel Reservation</a>
+{#                            <a class="mt-2 btn btn-light btn-sm px-2 gap-3"#}
+{#                               href="Coursereservation?code={{ Course_reservation.Course_code }}&cancel=True">取消Reservation</a>#}
                         </td>
                     </tr>
                 {% endfor %}

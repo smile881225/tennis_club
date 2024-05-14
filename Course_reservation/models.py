@@ -7,13 +7,13 @@ class Course_reservation(models.Model):
     Time_start = models.DateField(null=True,help_text="開始日期")
     Time_end = models.DateField(null=True,help_text="結束日期")
     week_choices = [
-        ('星期一', '星期一'),
-        ('星期二', '星期二'),
-        ('星期三', '星期三'),
-        ('星期四', '星期四'),
-        ('星期五', '星期五'),
-        ('星期六', '星期六'),
-        ('星期日', '星期日'),
+        ('Monday', 'Monday'),
+        ('Tuesday', 'Tuesday'),
+        ('Wednesday', 'Wednesday'),
+        ('Thursday', 'Thursday'),
+        ('Friday', 'Friday'),
+        ('Saturday', 'Saturday'),
+        ('Sunday', 'Sunday'),
     ]
     week=models.CharField(max_length=10, choices=week_choices, default='')
     # def week(self):
@@ -34,23 +34,22 @@ class Course_reservation(models.Model):
     class_time_end=models.TimeField(null=True)
     Classroom = models.CharField(max_length=255,null=True,help_text="教室")
     Category_choices = [
-        ('基礎班', '基礎班'),
-        ('進階班', '進階班'),
-        ('大師班', '大師班'),
+        ('Beginner', 'Beginner'),
+        ('Intermediate', 'Intermediate'),
+        ('Master', 'Master'),
     ]
     Category = models.CharField(max_length=255,choices=Category_choices,null=True,help_text="課程等級")
     Coach_name = models.CharField(max_length=255,null=True,help_text="教練名子")
     Full_number_applicants = models.IntegerField(default=26,null=True,help_text="總共可報名的人數")
     Current_number_applicants = models.IntegerField(default=0,null=True,help_text="目前報名人數")
     Class_status_choices = [
-        ('報名中', '報名中'),
-        ('開班中', '開班中'),
-        ('報名已滿', '報名已滿'),
-        ('停開', '停開'),
-        ('僅現場報名', '僅現場報名'),
+        ('Registration Open', 'Registration Open'),#報名中
+        (' Registration Closed', ' Registration Closed'),#報名已滿
+        ('Cancelled ', 'Cancelled '),#停開
+        ('On-site Registration Only', 'On-site Registration Only'),#僅現場報名
     ]
 
-    Class_status = models.CharField(max_length=255,choices=Class_status_choices,null=True,help_text="班級狀態，報名中、開班中、報名已滿、停開、僅現場報名")
+    Class_status = models.CharField(max_length=255,choices=Class_status_choices,null=True,help_text="班級狀態，報名中、報名已滿、停開、僅現場報名")
 
     # 如果單純呼叫，就會回傳下面資料，django格式
     def __str__(self):

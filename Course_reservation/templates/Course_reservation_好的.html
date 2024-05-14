@@ -36,13 +36,13 @@ My Tennis Club - List of all members
                                 課程代碼：{{ Course_reservation.Course_code }} <br>
                                 授課教室：{{ Course_reservation.Classroom }} <br>
                                 {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                {{ Course_reservation.Time_start | week }}<br>
+                                {{ Course_reservation.week  }}<br>
                                 {{ Course_reservation.class_time_start }}~
                                 {{ Course_reservation.class_time_end }}
                                 <br>
                                 滿班人數：{{ Course_reservation.Full_number_applicants }}人 <br>
                                 目前報名人數：{{ Course_reservation.Current_number_applicants }}人 <br>
-                                <a class="mt-2 nav-link btn btn-light"
+                                <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 nav-link btn btn-light"
                                     href="Course_content?code={{ Course_reservation.Course_code }}"">預約課程</a>
                                 {#                                            <input class="nav-link btn btn-light" type='submit' value='預約課程'>#}
                                 <br>
@@ -65,13 +65,13 @@ My Tennis Club - List of all members
                                                 課程代碼：{{ Course_reservation.Course_code }} <br>
                                                 授課教室：{{ Course_reservation.Classroom }} <br>
                                                 {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                                {{ Course_reservation.Time_start | week }}<br>
+                                                {{ Course_reservation.week  }}<br>
                                                 {{ Course_reservation.class_time_start }}~
                                                 {{ Course_reservation.class_time_end }}
                                                 <br>
                                                 滿班人數：{{ Course_reservation.Full_number_applicants }}人 <br>
                                                 目前報名人數：{{ Course_reservation.Current_number_applicants }}人 <br>
-                                                <a class="mt-2 nav-link btn btn-light"
+                                                <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 nav-link btn btn-light"
                                                     href="Course_content?code={{ Course_reservation.Course_code }}"">預約課程</a>
                             {#                                            <input class="nav-link btn btn-light" type='submit' value='預約課程'>#}
                             <br>
@@ -93,7 +93,7 @@ My Tennis Club - List of all members
                                                                 課程代碼：{{ Course_reservation.Course_code }} <br>
                                                                 授課教室：{{ Course_reservation.Classroom }} <br>
                                                                 {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                                                {{ Course_reservation.Time_start | week }}<br>
+                                                                {{ Course_reservation.week  }}<br>
                                                                 {{ Course_reservation.class_time_start }}~
                                                                 {{ Course_reservation.class_time_end }}
                                                                 <br>
@@ -101,7 +101,7 @@ My Tennis Club - List of all members
                                                                 <br>
                                                                 目前報名人數：{{ Course_reservation.Current_number_applicants }}人
                                                                 <br>
-                                                                <a class="mt-2 nav-link btn btn-light"
+                                                                <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 nav-link btn btn-light"
                                                                     href="Course_content?code={{ Course_reservation.Course_code }}"">預約課程</a>
                             {#                                            <input class="nav-link btn btn-light" type='submit' value='預約課程'>#}
                             <br>
@@ -126,7 +126,7 @@ My Tennis Club - List of all members
                                                                                 授課教室：{{ Course_reservation.Classroom }}
                                                                                 <br>
                                                                                 {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                                                                {{ Course_reservation.Time_start | week }}<br>
+                                                                                {{ Course_reservation.week  }}<br>
                                                                                 {{ Course_reservation.class_time_start }}~
                                                                                 {{ Course_reservation.class_time_end }}
                                                                                 <br>
@@ -134,7 +134,7 @@ My Tennis Club - List of all members
                                                                                 <br>
                                                                                 目前報名人數：{{ Course_reservation.Current_number_applicants }}人
                                                                                 <br>
-                                                                                <a class="mt-2 nav-link btn btn-light"
+                                                                                <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 nav-link btn btn-light"
                                                                                     href="Course_content?code={{ Course_reservation.Course_code }}"">預約課程</a>
                             {#                                            <input class="nav-link btn btn-light" type='submit' value='預約課程'>#}
                             <br>
@@ -159,7 +159,7 @@ My Tennis Club - List of all members
                                                                                                 授課教室：{{ Course_reservation.Classroom }}
                                                                                                 <br>
                                                                                                 {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                                                                                {{ Course_reservation.Time_start | week }}<br>
+                                                                                                {{ Course_reservation.week  }}<br>
                                                                                                 {{ Course_reservation.class_time_start }}~
                                                                                                 {{ Course_reservation.class_time_end }}
                                                                                                 <br>
@@ -167,7 +167,7 @@ My Tennis Club - List of all members
                                                                                                 <br>
                                                                                                 目前報名人數：{{ Course_reservation.Current_number_applicants }}人
                                                                                                 <br>
-                                                                                                <a class="mt-2 nav-link btn btn-light"
+                                                                                                <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 nav-link btn btn-light"
                                                                                                     href="Course_content?code={{ Course_reservation.Course_code }}">預約課程</a>
                                                                                                 {#                                            <input class="nav-link btn btn-light" type='submit' value='預約課程'>#}
                                                                                                 <br>
@@ -192,7 +192,7 @@ My Tennis Club - List of all members
                                                                                             授課教室：{{ Course_reservation.Classroom }}
                                                                                             <br>
                                                                                             {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                                                                            {{ Course_reservation.Time_start | week }}<br>
+                                                                                            {{ Course_reservation.week  }}<br>
                                                                                             {{ Course_reservation.class_time_start }}~
                                                                                             {{ Course_reservation.class_time_end }}
                                                                                             <br>
@@ -200,7 +200,7 @@ My Tennis Club - List of all members
                                                                                             <br>
                                                                                             目前報名人數：{{ Course_reservation.Current_number_applicants }}人
                                                                                             <br>
-                                                                                            <a class="mt-2 nav-link btn btn-light"
+                                                                                            <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 nav-link btn btn-light"
                                                                                                 href="Course_content?code={{ Course_reservation.Course_code }}"">預約課程</a>
                             {#                                            <input class="nav-link btn btn-light" type='submit' value='預約課程'>#}
                             <br>
@@ -225,7 +225,7 @@ My Tennis Club - List of all members
                                                                                                             授課教室：{{ Course_reservation.Classroom }}
                                                                                                             <br>
                                                                                                             {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                                                                                            {{ Course_reservation.Time_start | week }}<br>
+                                                                                                            {{ Course_reservation.week  }}<br>
                                                                                                             {{ Course_reservation.class_time_start }}~
                                                                                                             {{ Course_reservation.class_time_end }}
                                                                                                             <br>
@@ -233,7 +233,7 @@ My Tennis Club - List of all members
                                                                                                             <br>
                                                                                                             目前報名人數：{{ Course_reservation.Current_number_applicants }}人
                                                                                                             <br>
-                                                                                                            <a class="mt-2 nav-link btn btn-light"
+                                                                                                            <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 nav-link btn btn-light"
                                                                                                                 href="Course_content?code={{ Course_reservation.Course_code }}"">預約課程</a>
                             {#                                            <input class="nav-link btn btn-light" type='submit' value='預約課程'>#}
                             <br>
