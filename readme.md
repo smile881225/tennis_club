@@ -1,6 +1,8 @@
 指令
 > venv\Scripts\activate.bat
 > py manage.py runserver
+> python manage.py makemigrations
+> python manage.py migrate
 # version bind_user
 
 前一版本：img

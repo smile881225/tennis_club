@@ -12,8 +12,6 @@ class Course_reservation(models.Model):
         ('Wednesday', 'Wednesday'),
         ('Thursday', 'Thursday'),
         ('Friday', 'Friday'),
-        ('Saturday', 'Saturday'),
-        ('Sunday', 'Sunday'),
     ]
     week=models.CharField(max_length=10, choices=week_choices, default='')
     # def week(self):
@@ -63,7 +61,17 @@ class Course_reservation_history(models.Model):
     Coach_name= models.CharField(max_length=255,null=True,help_text="教練名子")
     Student_id = models.CharField(max_length=255,null=True,help_text="學生帳號")
     Create_time = models.DateTimeField(auto_now_add=True,help_text="建立時間")
-    State =models.CharField(max_length=255,null=True,help_text="預約狀態，完成預約、已取消")
+    class_time_start=models.TimeField(null=True)
+    class_time_end=models.TimeField(null=True)
+    week_choices = [
+        ('Monday', 'Monday'),
+        ('Tuesday', 'Tuesday'),
+        ('Wednesday', 'Wednesday'),
+        ('Thursday', 'Thursday'),
+        ('Friday', 'Friday'),
 
+    ]
+    week = models.CharField(max_length=10, choices=week_choices, default='')
+    State =models.CharField(max_length=255,null=True,help_text="預約狀態，完成預約、已取消")
 
 

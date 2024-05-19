@@ -38,7 +38,7 @@
                     <td>{{ course_reservation.Coach_name }}</td>
                     <td>{{ course_reservation.Full_number_applicants }}</td>
                     <td>{{ course_reservation.Current_number_applicants }}</td>
-                <td class=""> <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="nav-link btn btn-light"
+                <td class=""> <a id="{{ course_reservation.Course_code}}_Course_Reservation" class="nav-link btn btn-light"
                 href="/Course_reservation/Course_content?code={{ course_reservation.Course_code }}">Course Reservation</a></td>
                 </tr>
             {% endfor %}
@@ -48,7 +48,7 @@
     <div id="loaderAnimation" class="d-none loader-animation">
             <div class="loader-container">
                 <div class="loader"></div>
-                <div id="loading-text" class="loading-text">Searching...</div>
+                <div id="loading-text" class="loading-text">loading...</div>
                 <button id="showResultsButton" class="d-none btn btn-primary showResultsButton">Show Search Results</button>
             </div>
     </div>

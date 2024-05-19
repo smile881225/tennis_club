@@ -1,245 +1,39 @@
 {% extends "master.html" %}
 
 {% block title %}
-My Tennis Club - List of all members
+    My Tennis Club - List of all members
 {% endblock %}
 
 {% load my_custom_filters %}
 
 {% block content %}
-<div class="container-fluid p-5 pt-3">
+    <div class="container-fluid p-5 pt-3">
         <h3 class="text-success">Course Overview</h3>
+                        {% for Course_reservation in Course_reservation_list %}
+                            <form name='my form' action='Course_content/' method='GET'>
+                                <td>
+                                    Session：{{ Course_reservation.Period }}<br>
+                                    Coach：{{ Course_reservation.Coach_name }}<br>
+                                    Level：{{ Course_reservation.Category }} <br>
+                                    Code：{{ Course_reservation.Course_code }} <br>
+                                    Classroom：{{ Course_reservation.Classroom }} <br>
+                                    {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
+                                    {{ Course_reservation.week  }}<br>
+                                    {{ Course_reservation.class_time_start }}~
+                                    {{ Course_reservation.class_time_end }}
+                                    <br>
+                                    Maximum Class Size：{{ Course_reservation.Full_number_applicants }} <br>
+                                    Current Enrollment：{{ Course_reservation.Current_number_applicants }} <br>
+                                    <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 btn btn-light btn-sm px-2 gap-3"
+                                       href="/Course_reservation/Course_content?code={{ Course_reservation.Course_code }}">Course Reservation</a>
+                                    {#                                            <input class="nav-link btn btn-light" type='submit' value='Course Reservation'>#}
+                                    <br>
+                                </td>
+                            <hr>
+                            </form>
+                        {% endfor %}
 
-    <table class="table table-striped table-bordered">
-        <tr>
-            {#                <th> 時段</th>#}
-            <th> Monday</th>
-            <th> Tuesday</th>
-            <th> Wednesday</th>
-            <th> Thursday</th>
-            <th> Friday</th>
-            <th> Saturday</th>
-            <th> Sunday</th>
-        </tr>
-        {#            <td width="9%" rowspan="5">这个单元格横跨三列</td>#}
-        <tr>
-            <td width="10%" class="p-0">
-                <table class="table">
-                    {% for Course_reservation in Course_reservation_list %}
-                    <tr>
-                        <form name='my form' action='Course_content/' method='GET'>
-                            {% if Course_reservation.week == "Monday" %}
-                            <td>
-                                Session：{{ Course_reservation.Period }}<br>
-                                Coach：{{ Course_reservation.Coach_name }}<br>
-                                Level：{{ Course_reservation.Category }} <br>
-                                Code：{{ Course_reservation.Course_code }} <br>
-                                Classroom：{{ Course_reservation.Classroom }} <br>
-                                {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                {{ Course_reservation.class_time_start }}~
-                                {{ Course_reservation.class_time_end }}
-                                <br>
-                                Maximum Class Size：{{ Course_reservation.Full_number_applicants }} <br>
-                                Current Enrollment：{{ Course_reservation.Current_number_applicants }} <br>
-                                <a id="{{ Course_reservation.Course_code }}_Course_Reservation"class="mt-2 nav-link btn btn-light"
-                                    href="Course_content?code={{ Course_reservation.Course_code }}"">Course Reservation</a>
-                                {#                                            <input class="nav-link btn btn-light" type='submit' value='Course Reservation'>#}
-                                <br>
-                            </td>
-                            {% endif %}
-                        </form>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </td>
-            <td width=" 10%" class="p-0">
-                                    <table class="table">
-                                        {% for Course_reservation in Course_reservation_list %}
-                                        <tr>
-                                            {% if Course_reservation.week == "Tuesday" %}
-                                            <td>
-                                                Session：{{ Course_reservation.Period }}<br>
-                                                Coach：{{ Course_reservation.Coach_name }}<br>
-                                                Level：{{ Course_reservation.Category }} <br>
-                                                Code：{{ Course_reservation.Course_code }} <br>
-                                                Classroom：{{ Course_reservation.Classroom }} <br>
-                                                {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                                {{ Course_reservation.class_time_start }}~
-                                                {{ Course_reservation.class_time_end }}
-                                                <br>
-                                                Maximum Class Size：{{ Course_reservation.Full_number_applicants }} <br>
-                                                Current Enrollment：{{ Course_reservation.Current_number_applicants }} <br>
-                                                <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 nav-link btn btn-light"
-                                                    href="Course_content?code={{ Course_reservation.Course_code }}">Course Reservation</a>
-                            {#                                            <input class="nav-link btn btn-light" type='submit' value='Course Reservation'>#}
-                            <br>
-                        </td>
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
-                </table>
-            </td>
-            <td width=" 10%" class="p-0">
-                                                    <table class="table">
-                                                        {% for Course_reservation in Course_reservation_list %}
-                                                        <tr>
-                                                            {% if Course_reservation.week == "Wednesday" %}
-                                                            <td>
-                                                                Session：{{ Course_reservation.Period }}<br>
-                                                                Coach：{{ Course_reservation.Coach_name }}<br>
-                                                                Level：{{ Course_reservation.Category }} <br>
-                                                                Code：{{ Course_reservation.Course_code }} <br>
-                                                                Classroom：{{ Course_reservation.Classroom }} <br>
-                                                                {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                                                {{ Course_reservation.class_time_start }}~
-                                                                {{ Course_reservation.class_time_end }}
-                                                                <br>
-                                                                Maximum Class Size：{{ Course_reservation.Full_number_applicants }}
-                                                                <br>
-                                                                Current Enrollment：{{ Course_reservation.Current_number_applicants }}
-                                                                <br>
-                                                                <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 nav-link btn btn-light"
-                                                                    href="Course_content?code={{ Course_reservation.Course_code }}"">Course Reservation</a>
-                            {#                                            <input class="nav-link btn btn-light" type='submit' value='Course Reservation'>#}
-                            <br>
-                        </td>
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
-                </table>
-            </td>
-            <td width=" 10%" class="p-0">
-                                                                    <table class="table">
-                                                                        {% for Course_reservation in Course_reservation_list %}
-                                                                        <tr>
-                                                                            {% if Course_reservation.week == "Thursday" %}
-                                                                            <td>
-                                                                                Session：{{ Course_reservation.Period }}<br>
-                                                                                Coach：{{ Course_reservation.Coach_name }}<br>
-                                                                                Level：{{ Course_reservation.Category }}
-                                                                                <br>
-                                                                                Code：{{ Course_reservation.Course_code }}
-                                                                                <br>
-                                                                                Classroom：{{ Course_reservation.Classroom }}
-                                                                                <br>
-                                                                                {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                                                                {{ Course_reservation.class_time_start }}~
-                                                                                {{ Course_reservation.class_time_end }}
-                                                                                <br>
-                                                                                Maximum Class Size：{{ Course_reservation.Full_number_applicants }}
-                                                                                <br>
-                                                                                Current Enrollment：{{ Course_reservation.Current_number_applicants }}
-                                                                                <br>
-                                                                                <a id="{{ Course_reservation.Course_code }}_Course_Reservation"class="mt-2 nav-link btn btn-light"
-                                                                                    href="Course_content?code={{ Course_reservation.Course_code }}"">Course Reservation</a>
-                            {#                                            <input class="nav-link btn btn-light" type='submit' value='Course Reservation'>#}
-                            <br>
-                        </td>
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
-                </table>
-            </td>
-            <td width=" 10%" class="p-0">
-                                                                                    <table class="table">
-                                                                                        {% for Course_reservation in Course_reservation_list %}
-                                                                                        <tr>
-                                                                                            {% if Course_reservation.week == "Friday" %}
-                                                                                            <td>
-                                                                                                Session：{{ Course_reservation.Period }}<br>
-                                                                                                Coach：{{ Course_reservation.Coach_name }}<br>
-                                                                                                Level：{{ Course_reservation.Category }}
-                                                                                                <br>
-                                                                                                Code：{{ Course_reservation.Course_code }}
-                                                                                                <br>
-                                                                                                Classroom：{{ Course_reservation.Classroom }}
-                                                                                                <br>
-                                                                                                {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                                                                                {{ Course_reservation.class_time_start }}~
-                                                                                                {{ Course_reservation.class_time_end }}
-                                                                                                <br>
-                                                                                                Maximum Class Size：{{ Course_reservation.Full_number_applicants }}
-                                                                                                <br>
-                                                                                                Current Enrollment：{{ Course_reservation.Current_number_applicants }}
-                                                                                                <br>
-                                                                                                <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 nav-link btn btn-light"
-                                                                                                    href="Course_content?code={{ Course_reservation.Course_code }}">Course Reservation</a>
-                                                                                                {#                                            <input class="nav-link btn btn-light" type='submit' value='Course Reservation'>#}
-                                                                                                <br>
-                                                                                            </td>
-                                                                                            {% endif %}
-                                                                                        </tr>
-                                                                                        {% endfor %}
-                                                                                    </table>
-                                                                            </td>
-                                                                            <td width="10%" class="p-0">
-                                                                                <table class="table">
-                                                                                    {% for Course_reservation in Course_reservation_list %}
-                                                                                    <tr>
-                                                                                        {% if Course_reservation.week == "Saturday" %}
-                                                                                        <td>
-                                                                                            Session：{{ Course_reservation.Period }}<br>
-                                                                                            Coach：{{ Course_reservation.Coach_name }}<br>
-                                                                                            Level：{{ Course_reservation.Category }}
-                                                                                            <br>
-                                                                                            Code：{{ Course_reservation.Course_code }}
-                                                                                            <br>
-                                                                                            Classroom：{{ Course_reservation.Classroom }}
-                                                                                            <br>
-                                                                                            {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                                                                            {{ Course_reservation.class_time_start }}~
-                                                                                            {{ Course_reservation.class_time_end }}
-                                                                                            <br>
-                                                                                            Maximum Class Size：{{ Course_reservation.Full_number_applicants }}
-                                                                                            <br>
-                                                                                            Current Enrollment：{{ Course_reservation.Current_number_applicants }}
-                                                                                            <br>
-                                                                                            <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 nav-link btn btn-light"
-                                                                                                href="Course_content?code={{ Course_reservation.Course_code }}"">Course Reservation</a>
-                            {#                                            <input class="nav-link btn btn-light" type='submit' value='Course Reservation'>#}
-                            <br>
-                        </td>
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
-                </table>
-            </td>
-            <td width=" 10%" class="p-0">
-                                                                                                <table class="table">
-                                                                                                    {% for Course_reservation in Course_reservation_list %}
-                                                                                                    <tr>
-                                                                                                        {% if Course_reservation.week == "Sunday" %}
-                                                                                                        <td>
-                                                                                                            Session：{{ Course_reservation.Period }}<br>
-                                                                                                            Coach：{{ Course_reservation.Coach_name }}<br>
-                                                                                                            Level：{{ Course_reservation.Category }}
-                                                                                                            <br>
-                                                                                                            Code：{{ Course_reservation.Course_code }}
-                                                                                                            <br>
-                                                                                                            Classroom：{{ Course_reservation.Classroom }}
-                                                                                                            <br>
-                                                                                                            {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-                                                                                                            {{ Course_reservation.class_time_start }}~
-                                                                                                            {{ Course_reservation.class_time_end }}
-                                                                                                            <br>
-                                                                                                            Maximum Class Size：{{ Course_reservation.Full_number_applicants }}
-                                                                                                            <br>
-                                                                                                            Current Enrollment：{{ Course_reservation.Current_number_applicants }}
-                                                                                                            <br>
-                                                                                                            <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 nav-link btn btn-light"
-                                                                                                                href="Course_content?code={{ Course_reservation.Course_code }}"">Course Reservation</a>
-                            {#                                            <input class="nav-link btn btn-light" type='submit' value='Course Reservation'>#}
-                            <br>
-                        </td>
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
-                </table>
-            </td>
-        </tr>
-    </table>
-
-</div>
+    </div>
 
 
 

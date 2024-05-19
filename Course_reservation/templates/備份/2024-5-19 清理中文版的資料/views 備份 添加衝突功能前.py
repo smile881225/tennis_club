@@ -9,7 +9,7 @@ from .filters import Course_reservation_Filter
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
-from django.db.models import Q  # 引入 Q 對象，用於複合查詢
+
 
 def index(request):
     template = loader.get_template('Course_reservation.html')
@@ -97,11 +97,8 @@ def CourseReservation(request):
         except:
             pass
         print(cancel)
-
-        # 篩選課程資料表裡有對到的第一筆資料
+        # 篩選課程資料表裡的第一筆資料
         CourseData = Course_reservation.objects.filter(Course_code=code).first()
-
-        # 判斷如果目前的人數大於預約人數的話
         if  (CourseData.Current_number_applicants >= CourseData.Full_number_applicants) and  cancel != "True"  :
             reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="Appointment Confirmed")
             context = {
@@ -110,55 +107,35 @@ def CourseReservation(request):
             }
             # print(context["msg"])
             return HttpResponse(template.render(context))
-
         # 篩選歷史資料表裡的資料，用於確認有沒有預約過
         haveReservation = Course_reservation_history.objects.filter(Student_id=request.user, Course_code=code).exists()
 
-        # 檢查是否有衝堂
-        conflicts = Course_reservation_history.objects.filter(
-            week=CourseData.week,  # 先比對星期
-            State='Appointment Confirmed',  # 並且狀態為CCC
-            class_time_start__lt=CourseData.class_time_end,
-            class_time_end__gt= CourseData.class_time_start
-        ).exclude(
-            # Q(Course_code=CourseData.Course_code) & Q(State='Cancelled')  # 複合查詢，排除課程代碼為DD且狀態為cancel的紀錄
-            Course_code=CourseData.Course_code
-        ).exists()
-
-        if conflicts:
-            print("課程時間衝突，請選擇其他時間。")
-
+        # 如果沒有被預約過
+        if not haveReservation:
+            # 加入新的資料到表裡面
+            new_reservation = Course_reservation_history(
+                Period=f"{CourseData.Period}_{CourseData.Category}",
+                Course_code=CourseData.Course_code,
+                Coach_name=CourseData.Coach_name,
+                Student_id=request.user,
+                State = "Appointment Confirmed",
+            class_time_start = CourseData.class_time_start,
+            class_time_end = CourseData.class_time_end,
+            )
+            # 儲存
+            new_reservation.save()
+            # msg = "Appointment Confirmed"
+        # 如果被預約過，改狀態為預約
         else:
-            print("課程時間不衝突，成功預約")
-
-            # 如果沒有被預約過
-            if not haveReservation:
-                # 加入新的資料到表裡面
-                new_reservation = Course_reservation_history(
-                    Period=f"{CourseData.Period}_{CourseData.Category}",
-                    Course_code=CourseData.Course_code,
-                    Coach_name=CourseData.Coach_name,
-                    Student_id=request.user,
-                    State = "Appointment Confirmed",
-                    class_time_start = CourseData.class_time_start,
-                    class_time_end = CourseData.class_time_end,
-                    week= CourseData.week
-                )
-                # 儲存
-                new_reservation.save()
+            historyData = Course_reservation_history.objects.filter(Student_id=request.user, Course_code=code).first()
+            # 如果目前為預約的話，就甚麼都不做，如果不是的話，把狀態改成預約
+            if historyData.State == "Cancelled":
+                historyData.State = "Appointment Confirmed"
+                historyData.save()
+                # 課程人數+1
+                CourseData.Current_number_applicants = CourseData.Current_number_applicants + 1
+                CourseData.save()
                 # msg = "Appointment Confirmed"
-
-            # 如果被預約過，改狀態為預約
-            else:
-                historyData = Course_reservation_history.objects.filter(Student_id=request.user, Course_code=code).first()
-                # 如果目前為預約的話，就甚麼都不做，如果不是的話，把狀態改成預約
-                if historyData.State == "Cancelled":
-                    historyData.State = "Appointment Confirmed"
-                    historyData.save()
-                    # 課程人數+1
-                    CourseData.Current_number_applicants = CourseData.Current_number_applicants + 1
-                    CourseData.save()
-                    # msg = "Appointment Confirmed"
 
         # 篩選有完成預約的人
         reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="Appointment Confirmed")

@@ -117,7 +117,9 @@ def CourseReservation(request):
                 Course_code=CourseData.Course_code,
                 Coach_name=CourseData.Coach_name,
                 Student_id=request.user,
-                State = "Appointment Confirmed"
+                State = "Appointment Confirmed",
+            class_time_start = CourseData.class_time_start,
+            class_time_end = CourseData.class_time_end,
             )
             # 儲存
             new_reservation.save()

@@ -7,7 +7,7 @@
 {% block content %}
 
     <div class="container-fluid p-5 pt-3">
-        <h3 class="text-success">Course reservation record</h3>
+        <h3 id="Course reservation record" class="text-success">Course reservation record</h3>
         <td width="10%" class="p-0">
             <table class="table">
                 {% for Course_reservation in Course %}
@@ -20,7 +20,7 @@
                             Registration Time{{ Course_reservation.Create_time }}<br>
                             Reservation Status：{{ Course_reservation.State }}<br>
                             <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 btn btn-light btn-sm px-2 gap-3"
-                               href="/Course_reservation/Coursereservation?code={{ Course_reservation.Course_code }}&cancel=True">Cancel Reservation</a>
+                               href="/Course_reservation/Cancel_Course?code={{ Course_reservation.Course_code }}&cancel=True">Cancel Reservation</a>
                         </td>
                     </tr>
                 {% endfor %}
