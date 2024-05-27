@@ -10,5 +10,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('Coursereservation/', views.CourseReservation, name='CourseReservation'),
     path('Cancel_Course/', views.Cancel_Course, name='Cancel_Course'),
-    path('Course_search/', views.Course_search, name='Course_search')
+    path('Course_search/', views.Course_search, name='Course_search'),
+    path('Course_Clear_check/', views.Course_Clear_check, name='Course_Clear_check'),
+    path('Course_Clear/', views.Course_Clear, name='Course_Clear'),
+    path('Coursereservation/Course_reservation_result/', views.Course_reservation_result, name='Course_reservation_result'),
 ]

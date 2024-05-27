@@ -1,0 +1,31 @@
+{% extends "master.html" %}
+
+{% block title %}
+    My Tennis Club - List of all members
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid p-5 pt-3">
+        <h3 class="text-success">Course Reservation Result</h3>
+        <td width="10%" class="p-0">
+            <table class="table">
+                <tr>
+                    <td>
+                        {% if msg == "預約成功" %}
+                            <h1 class="alert alert-success">{{msg}}
+                        {% else %}
+                            <h1 class="alert alert-warning">{{msg}}
+                        {% endif %}
+                        <br>
+                        <a id="{{ Course_reservation.Course_code }}_Course_Reservation"
+                           class="mt-2 btn btn-sm px-2 gap-3 btn-primary"
+                           href="Course_reservation_result">Confirm</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </div>
+
+
+{% endblock %}

@@ -82,12 +82,23 @@ def third_stage(request):
     template = loader.get_template('third_stage.html')
     return HttpResponse(template.render())
 
+# 預約結果頁面
+def Course_reservation_result(request):
+        template = loader.get_template('Reservation.html')
+        
+        # 篩選有完成預約的人
+        reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="Appointment Confirmed")
+
+        context = {
+            "Course": reservationData,
+        }
+        return HttpResponse(template.render(context))
 
 # 預約課程
 def CourseReservation(request):
-    template = loader.get_template('Reservation.html')
+    template = loader.get_template('Course_reservation_result.html')
     data = {}
-    # msg = ""
+    msg = ""
     cancel = False
     try:
         # 從 A 標籤的url拿到 code
@@ -101,15 +112,14 @@ def CourseReservation(request):
         # 篩選課程資料表裡有對到的第一筆資料
         CourseData = Course_reservation.objects.filter(Course_code=code).first()
 
-        # 判斷如果目前的人數大於預約人數的話
-        if  (CourseData.Current_number_applicants >= CourseData.Full_number_applicants) and  cancel != "True"  :
-            reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="Appointment Confirmed")
-            context = {
-                "Course": reservationData,
-                # "msg" : "Appointment Limit Reached"
-            }
-            # print(context["msg"])
-            return HttpResponse(template.render(context))
+        # # 判斷如果目前的人數大於預約人數的話
+        # if  (CourseData.Current_number_applicants >= CourseData.Full_number_applicants) and  cancel != "True"  :
+        #     reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="Appointment Confirmed")
+        #     context = {
+        #         "Course": reservationData,
+        #     }
+        #     # print(context["msg"])
+        #     return HttpResponse(template.render(context))
 
         # 篩選歷史資料表裡的資料，用於確認有沒有預約過
         haveReservation = Course_reservation_history.objects.filter(Student_id=request.user, Course_code=code).exists()
@@ -127,7 +137,10 @@ def CourseReservation(request):
 
         if conflicts:
             print("課程時間衝突，請選擇其他時間。")
-
+            context = {
+                "msg" : "預約失敗，因課程時間衝突"
+            }
+            return HttpResponse(template.render(context))
         else:
             print("課程時間不衝突，成功預約")
 
@@ -166,6 +179,7 @@ def CourseReservation(request):
         # 篩選完放到context裡面
         context = {
             "Course": reservationData,
+            "msg" : "預約成功"
             # "msg": msg
         }
         return HttpResponse(template.render(context))
@@ -262,3 +276,67 @@ def Course_search(request):
 
     return HttpResponse(template.render(context, request))
     return HttpResponse(template.render())
+
+
+# 取消預約確認頁面
+def Course_Clear_check(request):
+        reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="Appointment Confirmed")
+        context = {
+            "Course": reservationData,
+        }
+        return render(request, 'Course_Clear_check.html', context)
+
+
+
+#
+# def Course_Clear(request):
+#     if request.method == 'POST':
+#         # 更新所有狀態為 "Appointment Confirmed" 的預約記錄為 "Cancelled"
+#         Course_reservation_history.objects.filter(State="Appointment Confirmed").update(State="Cancelled")
+#
+#         # 更新對應課程的人數
+#         confirmed_reservations = Course_reservation_history.objects.filter(State="Cancelled")
+#         for reservation in confirmed_reservations:
+#             course = Course_reservation.objects.filter(Course_code=reservation.Course_code).first()
+#             if course:
+#                 course.Current_number_applicants = course.Current_number_applicants - 1
+#                 course.save()
+#         # 篩選有完成預約的人
+#         reservationData = Course_reservation_history.objects.filter(Student_id=request.user,State="Appointment Confirmed")
+#         # 篩選完放到context裡面
+#         context = {
+#             "Course": reservationData,
+#             # "msg": msg
+#         }
+#         # 重定向回 index 頁面
+#         return redirect('index')
+#
+#     # 加載 Course_reservation.html 頁面
+#     return render(request, 'Course_reservation.html')
+
+def Course_Clear(request):
+    if request.method == 'POST':
+
+        # 更新對應課程的人數
+        confirmed_reservations = Course_reservation_history.objects.filter(State="Appointment Confirmed")
+
+        for reservation in confirmed_reservations:
+            course = Course_reservation.objects.filter(Course_code=reservation.Course_code).first()
+            if course:
+                course.Current_number_applicants = course.Current_number_applicants - 1
+                course.save()
+
+        # 更新所有狀態為 "Appointment Confirmed" 的預約記錄為 "Cancelled"
+        Course_reservation_history.objects.filter(State="Appointment Confirmed").update(State="Cancelled")
+
+        # 重定向回 index 頁面
+        return redirect('index')
+
+    else:
+        # 顯示確認頁面
+        reservationData = Course_reservation_history.objects.filter(Student_id=request.user,
+                                                                    State="Appointment Confirmed")
+        context = {
+            "Course": reservationData,
+        }
+        return render(request, 'Course_cancel.html', context)

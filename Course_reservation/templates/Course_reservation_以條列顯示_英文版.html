@@ -8,7 +8,12 @@
 
 {% block content %}
     <div class="container-fluid p-5 pt-3">
-        <h3 class="text-success">Course Overview</h3>
+         <h3 class="text-success mb-3">Course Overview
+            <form method="POST" action="{% url 'Course_Clear' %}" style="float: right;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger ">Clear All Reservation</button>
+            </form>
+        </h3>
                         {% for Course_reservation in Course_reservation_list %}
                             <form name='my form' action='Course_content/' method='GET'>
                                 <td>
@@ -22,7 +27,7 @@
                                     {{ Course_reservation.class_time_start }}~
                                     {{ Course_reservation.class_time_end }}
                                     <br>
-                                    Maximum Class Size：{{ Course_reservation.Full_number_applicants }} <br>
+{#                                    Maximum Class Size：{{ Course_reservation.Full_number_applicants }} <br>#}
                                     Current Enrollment：{{ Course_reservation.Current_number_applicants }} <br>
                                     <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 btn btn-light btn-sm px-2 gap-3"
                                        href="/Course_reservation/Course_content?code={{ Course_reservation.Course_code }}">Course Reservation</a>
