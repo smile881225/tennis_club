@@ -1,9 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.template import loader
 from .models import Member
+from .forms import SurveyForm
 
-# Create your views here.
+def survey_view(request):
+    if request.method == 'POST':
+        form = SurveyForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('remind')  # 修改為實際的成功頁面地址
+    else:
+        form = SurveyForm()
+    return render(request, 'Questionnaire.html', {'form': form})
+
+def Questionnaire(request):
+    print ('Questionnaire is called')
+    template = loader.get_template('Questionnaire.html')
+    return HttpResponse(template.render())
+
 def members(request):
     mymembers = Member.objects.all()
     template = loader.get_template('all_members.html')
@@ -20,10 +36,17 @@ def details(request, id):
     }
     return HttpResponse(template.render(context, request))
 
+def remind(request):
+    print ('remind is called')
+    template = loader.get_template('remind.html')
+    return HttpResponse(template.render())
+
 def main(request):
     print ('main is called')
     template = loader.get_template('main.html')
     return HttpResponse(template.render())
+
+
 
 def testing(request):
     template = loader.get_template('template.html')

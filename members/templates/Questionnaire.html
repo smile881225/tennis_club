@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Mission instructions
+{% endblock %}
+
+{% block style %}
+    .container {
+        width: 390px;
+        height: 250px;
+        padding: 10px; /* 增加一些內邊距 */
+        overflow: hidden; /* 防止文本溢出 */
+        border: 1px solid #000000; /* 1px的黑色邊框 */
+        border-radius: 10px; /* 圓角設置 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .full-height {
+        height: calc(100vh - 220px); /* 全屏高度 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .contain{
+        display: grid;
+    }
+{% endblock %}
+
+{% block content %}
+
+<div class="full-height">
+    <div class="container">
+        <div class="contain">
+            <div class="container mt-5">
+                <h2>UX 問卷回饋</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.student_id.label_tag }} {{ form.student_id }}
+                    {% for field in form %}
+                    {% if field.name != 'student_id' %}
+                    <div>
+                    {{ field.errors }}
+                    {{ field.label_tag }} {{ field }}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

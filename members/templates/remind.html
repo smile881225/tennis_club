@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Mission instructions
+{% endblock %}
+
+{% block style %}
+    .container {
+        width: 390px;
+        height: 250px;
+        padding: 10px; /* 增加一些內邊距 */
+        overflow: hidden; /* 防止文本溢出 */
+        border: 1px solid #000000; /* 1px的黑色邊框 */
+        border-radius: 10px; /* 圓角設置 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .full-height {
+        height: calc(100vh - 220px); /* 全屏高度 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .contain{
+        display: grid;
+    }
+{% endblock %}
+
+{% block content %}
+
+<div class="full-height">
+    <div class="container">
+    <div class="contain">
+        <p>在任務開始前，請先注意以下幾點：</p>
+        <ol>
+            <li>任務期間不能做筆記</li>
+            <li>開啟螢幕錄影程式</li>
+            <li>下載並開啟 Rapi</li>
+        </ol>
+{#        <button class="btn btn-primary mt-3">我都確認好了，開始任務</button>#}
+        <a href="{% url 'main' %}" class="btn btn-primary mt-3">我都確認好了，開始任務</a>
+    </div>
+    </div>
+</div>
+
+{% endblock %}
