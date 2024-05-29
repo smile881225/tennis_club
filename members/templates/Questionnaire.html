@@ -1,55 +1,85 @@
 {% extends "base.html" %}
 
 {% block title %}
-  Mission instructions
+    Questionnaire feedback
 {% endblock %}
 
 {% block style %}
     .container {
-        width: 390px;
-        height: 250px;
-        padding: 10px; /* 增加一些內邊距 */
-        overflow: hidden; /* 防止文本溢出 */
-        border: 1px solid #000000; /* 1px的黑色邊框 */
-        border-radius: 10px; /* 圓角設置 */
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    width: auto;
+    padding: 20px;
+    {#        border: 1px solid #ccc;#}
+    {#        border-radius: 5px;#}
+    display: flex;
+    justify-content: center;
+    align-items: center;
     }
-    .full-height {
-        height: calc(100vh - 220px); /* 全屏高度 */
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    table {
+    height: calc(100vh - 220px); /* 全屏高度 */
+    width: 100%;
+    border-collapse: collapse;
     }
-    .contain{
-        display: grid;
+    th, td {
+
+    text-align: center;
+    border: 1px solid #ffefef;
+    padding: 10px;
+    }
+    .modal-dialog {
+    width: 400px;
+    height: 300px;
+    overflow: hidden;
+    overflow-y: auto; /* 添加滚动条 */
     }
 {% endblock %}
 
 {% block content %}
-
-<div class="full-height">
     <div class="container">
-        <div class="contain">
-            <div class="container mt-5">
-                <h2>UX 問卷回饋</h2>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.student_id.label_tag }} {{ form.student_id }}
-                    {% for field in form %}
-                    {% if field.name != 'student_id' %}
-                    <div>
-                    {{ field.errors }}
-                    {{ field.label_tag }} {{ field }}
-                    </div>
+        <form method="post">
+            {% csrf_token %}
+            <table class="mb-3">
+                <tr>
+                    <th style="padding:17px;">問題</th>
+                    <th> 1</th>
+                    <th> 2</th>
+                    <th> 3</th>
+                    <th> 4</th>
+                    <th> 5</th>
+                </tr>
+                {% for field in form %}
+                    {% if field.name != 'student_id' and forloop.revcounter > 3 %}
+                        <tr>
+                            <td style="text-align: start;">{{ field.label }}</td>
+                            {% for choice in field %}
+                                {% if not forloop.first %}
+                                    <td>
+                                        <label>
+                                            {{ choice }}
+                                        </label>
+                                    </td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
                     {% endif %}
+                    {% if forloop.revcounter <= 3 %}
+                        <tr style="">
+                            <td style="text-align: start;">{{ field.label }}</td>
+                            <td style="height: 130px;" colspan="5">{{ field }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="me-4">
+                    {% for field in form %}
+                        {% if forloop.first %}
+                            {{ field.label }}：
+                            {{ field }}
+                        {% endif %}
                     {% endfor %}
-                    <button type="submit" class="btn btn-primary">提交</button>
-                </form>
+                </div>
+                <button type="submit" class="btn btn-primary" style="float: right;">提交問卷</button>
             </div>
-        </div>
+        </form>
     </div>
-</div>
-
 {% endblock %}

@@ -17,7 +17,7 @@ class Member(models.Model):
 
 class Survey(models.Model):
     student_id = models.CharField(max_length=20, verbose_name='學號')
-    choice_labels = [('1', '非常不同意'), ('2', '不同意'), ('3', '普通'), ('4', '同意'), ('5', '非常同意')]
+    choice_labels = [('1', '非常不同意'), ('2', '不同意'), ('3', '中等'), ('4', '同意'), ('5', '非常同意')]
     question_1 = models.CharField(max_length=1, choices=choice_labels, verbose_name='在任何時候，我很清楚系統目前的狀態如何？')
     question_2 = models.CharField(max_length=1, choices=choice_labels, verbose_name='在操作的過程中，網頁是否都有在合理的時間內做出回應？')
     question_3 = models.CharField(max_length=1, choices=choice_labels, verbose_name='可以從每個頁面返回主頁嗎？')
@@ -29,8 +29,8 @@ class Survey(models.Model):
     question_9 = models.CharField(max_length=1, choices=choice_labels, verbose_name='網頁的排版設計遵循一般的網站標準嗎？')
     question_10 = models.CharField(max_length=1, choices=choice_labels, verbose_name='我在使用這個系統時，不需要記憶太多東西，就可以完成任務？')
     question_11 = models.CharField(max_length=1, choices=choice_labels, verbose_name='系統的顯示方式符合現實世界的習慣？')
-    fill_in_1 = models.TextField(verbose_name='你認為此系統的 UX 有哪裡好的地方嗎？')
-    fill_in_2 = models.TextField(verbose_name='你認為此系統的 UX 有哪裡不好的地方嗎？')
-
+    fill_in_1 = models.TextField(null=True,verbose_name='你認為此系統的 UX 有哪裡好的地方嗎？')
+    fill_in_2 = models.TextField(null=True,verbose_name='你認為此系統的 UX 有哪裡不好的地方嗎？')
+    fill_in_3 = models.TextField(null=True,verbose_name='給予系統的任何建議')
     def __str__(self):
         return self.student_id

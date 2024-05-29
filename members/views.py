@@ -10,15 +10,16 @@ def survey_view(request):
         form = SurveyForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('remind')  # 修改為實際的成功頁面地址
+            return render(request, 'remind.html', {'form': form})
     else:
         form = SurveyForm()
+
     return render(request, 'Questionnaire.html', {'form': form})
 
-def Questionnaire(request):
-    print ('Questionnaire is called')
-    template = loader.get_template('Questionnaire.html')
-    return HttpResponse(template.render())
+# def Questionnaire(request):
+#     print ('Questionnaire is called')
+#     template = loader.get_template('Questionnaire.html')
+#     return HttpResponse(template.render())
 
 def members(request):
     mymembers = Member.objects.all()
