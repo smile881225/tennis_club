@@ -10,10 +10,10 @@
 
 {% load static %}
 <link rel="stylesheet" href="{% static '/css/club.css' %}">
-
+<link rel="stylesheet" href="{% static '/css/loading.css' %}">
 <body>
 
-  <div class="p-5 bg-primary text-white rounded">
+  <div id="Hsueh Tennis Club" class="p-5 bg-primary text-white rounded">
     <h1>Hsueh Tennis Club</h1>
     <p>Tennis is not merely a sport; it is an artistry of motion and a testament to the indomitable human spirit. With each graceful stroke across the vibrant court, players embark on a journey of self-discovery and resilience. Beyond the score, tennis is a narrative of determination, a dance of skill, and a celebration of camaraderie. The court becomes a canvas where challenges are met with unwavering resolve, and every match is a canvas for personal triumph. In the world of tennis, we find not just a game but a passionate pursuit, a commitment to surpassing limits, and a profound connection to the essence of life.</p>
 {# <h1>軒網球俱樂部</h1>#}
@@ -22,46 +22,18 @@
 
   <div class="container-fluid mt-3">
     <ul class="nav">
-      <li class="nav-item">
-        <a id="HOME" class="nav-link" href="/main">HOME</a>
-{#        <a class="nav-link" href="/">首頁</a>#}
-      </li>
-{#      <li class="nav-item">#}
-{#        <a id="ADMIN" class="nav-link" href="/admin">ADMIN</a>#}
-{#        <a class="nav-link" href="/admin">後台管理</a>#}
-{#      </li>#}
         {#登入按鈕判斷#}
-      {% if user.is_authenticated %}
-        <li class="nav-item">
-            <a id="Logout"  class="nav-link" href="{% url 'logout' %}">Logout ({{ user }}) </a>
+{#      {% if user.is_authenticated %}#}
+{#        <li class="nav-item">#}
+{#            <a id="Logout"  class="nav-link" href="{% url 'logout' %}">Logout ({{ user }}) </a>#}
 {#            <a class="nav-link" href="{% url 'logout' %}">登出 ({{ user }}) </a>#}
-        </li>
-      {% else %}
-        <li class="nav-item">
-            <a id="Login"  class="nav-link" href="{% url 'login' %}">Login</a>
+{#        </li>#}
+{#      {% else %}#}
+{#        <li class="nav-item">#}
+{#            <a id="Login"  class="nav-link" href="{% url 'login' %}">Login</a>#}
 {#            <a class="nav-link" href="{% url 'login' %}">登入</a>#}
-        </li>
-      {% endif %}
-
-     <li class="nav-item">
-        <a id="Course Overview" class="nav-link" href="/Course_reservation/">Course Overview</a>
-{#        <a class="nav-link" href="/Course_reservation/">課程總攬</a>#}
-      </li>
-
-{#     <li class="nav-item">#}
-{#        <a id="Course search" class="nav-link" href="/Course_reservation/Course_search/">Course search</a>#}
-{#        <a class="nav-link" href="/Course_reservation/Course_search/">課程搜尋</a>#}
-{#      </li>#}
-
-
-        <li class="nav-item">
-                   <a id="Course reservation record" class="nav-link" href="/Course_reservation/Coursereservation/Course_reservation_result/">Course reservation record</a>
-{#                   <a class="nav-link" href="/Course_reservation/Coursereservation">課程預約紀錄</a>#}
-        </li>
-{#    <li class="nav-item">#}
-{#        <a class="nav-link" href="/courts/bookings/">My bookings</a>#}
-{#        <a class="nav-link" href="/courts/bookings/">場地預約紀錄</a>#}
-{#      </li>#}
+{#        </li>#}
+{#      {% endif %}#}
 
     </ul>
   </div>

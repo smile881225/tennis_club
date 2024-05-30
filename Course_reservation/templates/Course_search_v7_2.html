@@ -1,4 +1,4 @@
-{% extends "master.html" %}
+{% extends "master_v7_2.html" %}
 
 {% block title %}
     My Tennis Club - List of all members
@@ -15,13 +15,12 @@
             Code：{{ course_reservation_Filter.form.Course_code }}
             Week：{{ course_reservation_Filter.form.week }}
             Level：{{ course_reservation_Filter.form.Category }}
-
             <input type="submit" id="searchButton" class="ms-3 btn btn-primary" value="Search"/>
         </form>
         <br/>
 {#        <table class="table d-none" style=" max-width: 1500px">#}
         <table id="courseTable" class="table" style=" max-width: 1500px">
-            <thead>
+             <thead>
             <th>Session</th>
             <th>Code</th>
             <th>Level</th>
@@ -51,48 +50,21 @@
             </tbody>
         </table>
     </div>
-{#    <div id="loaderAnimation" class="d-none loader-animation">#}
-{#            <div class="loader-container">#}
-{#                <div class="loader"></div>#}
-{#                <div id="loading-text" class="loading-text">loading...</div>#}
-{#                <button id="showResultsButton" class="d-none btn btn-primary showResultsButton">Show Search Results</button>#}
-{#            </div>#}
-{#    </div>#}
-{##}
-{#    <script>#}
-{##}
-{#    document.getElementById('searchForm').addEventListener('submit', function(event) {#}
+
+
+    <script>
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
         {#// 防止表單的默認提交行為#}
-{#        event.preventDefault();#}
-{##}
-{#        // 顯示 loader 動畫#}
-{#        document.getElementById('loaderAnimation').classList.remove('d-none');#}
-{#        // 隱藏表格#}
-{#        document.getElementById('courseTable').classList.add('d-none');#}
-{##}
-{#        // 延遲三秒後再顯示表格#}
-{#         setTimeout(function() {#}
-{#            // 隱藏 loader 動畫#}
-{#            document.getElementById('loading-text').classList.add('d-none');#}
-{#            // 顯示顯示搜索結果按鈕#}
-{#            document.getElementById('showResultsButton').classList.remove('d-none');#}
-{#        }, 10000); // 3000 毫秒為三秒#}
-{#    });#}
-{##}
-{#     // 當按鈕被點擊時顯示搜索結果#}
-{#    document.getElementById('showResultsButton').addEventListener('click', function() {#}
-{##}
-{#        // 顯示搜索結果表格#}
-{#        document.getElementById('courseTable').classList.remove('d-none');#}
-{##}
-{#        //提交表單#}
-{#        document.getElementById('searchForm').submit();#}
-{##}
-{#        // 隱藏搜索結果按鈕#}
-{#        document.getElementById('showResultsButton').classList.add('d-none');#}
-{##}
-{##}
-{#    });#}
-{##}
-{#</script>#}
+        event.preventDefault();
+
+        // 隱藏表格
+        document.getElementById('courseTable').classList.add('d-none');
+
+        // 延遲七秒後再顯示表格
+        setTimeout(function() {
+            document.getElementById('courseTable').classList.remove('d-none');
+            document.getElementById('searchForm').submit();
+        }, 7000); // 7000 毫秒為七秒
+    });
+</script>
 {% endblock %}

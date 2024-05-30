@@ -14,7 +14,7 @@ def survey_view(request):
     else:
         form = SurveyForm()
 
-    return render(request, 'Questionnaire.html', {'form': form})
+    return render(request, 'survey_view.html', {'form': form})
 
 # def Questionnaire(request):
 #     print ('Questionnaire is called')
@@ -40,6 +40,13 @@ def details(request, id):
 def remind(request):
     print ('remind is called')
     template = loader.get_template('remind.html')
+    return HttpResponse(template.render())
+
+
+
+def remind_v1_2(request):
+    print ('remind_v1_2 is called')
+    template = loader.get_template('remind_v1_2.html')
     return HttpResponse(template.render())
 
 def main(request):
