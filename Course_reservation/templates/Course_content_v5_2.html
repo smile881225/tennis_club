@@ -1,4 +1,4 @@
-{% extends "master.html" %}
+{% extends master %}
 
 {% block title %}
 My Tennis Club - List of all members
@@ -21,8 +21,7 @@ My Tennis Club - List of all members
                     <br>
                     Classroom：{{ Course_reservation.Classroom }}
                     <br>
-                    {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
-
+                    {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}
 {#                    <br>#}
 {#                    Maximum Class Size：{{ Course_reservation.Full_number_applicants }}#}
                     <br>
@@ -32,7 +31,7 @@ My Tennis Club - List of all members
 {#                     <a class="mt-2 btn btn-light btn-sm px-2 gap-3"#}
 {#                        href="/Course_reservation/">Return</a>#}
                      <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 btn btn-sm px-2 gap-3 btn-primary"
-                        href="Coursereservation?code={{ Course_reservation.Course_code }}"">Confirm</a>
+                        href="Coursereservation?code={{ Course_reservation.Course_code }}">Confirm</a>
 {#                                            <input class="nav-link btn btn-light" type='submit' value='Reservation'>#}
                 </td>
             </tr>

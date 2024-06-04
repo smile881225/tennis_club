@@ -7,23 +7,28 @@
 {% block content %}
 
     <div class="container-fluid p-5 pt-3">
-        <h3 id="Course reservation record" class="text-success">Course reservation record</h3>
+        <h3 id="Course reservation record" class="text-success">Course reservation record
+            <a id="go_survey"
+               class="btn btn-warning px-2 gap-3 btn-primary" style="float: right;"
+{#               href="/survey_view/">Confirm Submission</a>#}
+               href="https://forms.gle/XzbXhtgZkUd2STho7">Confirm Submission</a>
+        </h3>
         <td width="10%" class="p-0">
             <table class="table">
                 {% for Course_reservation in Course %}
                     <tr>
                         <td>
-                            Session：{{ Course_reservation.Period }}<br>
+                  Session：{{ Course_reservation.Period }}<br>
                             Code：{{ Course_reservation.Course_code }}<br>
                             Coach：{{ Course_reservation.Coach_name }}<br>
                             Week：{{ Course_reservation.week}}<br>
                             Class time：{{ Course_reservation.class_time_start }}~
                             {{ Course_reservation.class_time_end }}<br>
                             Appointee：{{ Course_reservation.Student_id }}<br>
-{#                            Registration Time：{{ Course_reservation.Create_time }}<br>#}
+{#                          Registration Time：{{ Course_reservation.Create_time }}<br>#}
                             Reservation Status：{{ Course_reservation.State }}<br>
-                            <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 btn btn-light btn-sm px-2 gap-3"
-                               href="/Course_reservation/Cancel_Course?code={{ Course_reservation.Course_code }}&cancel=True&">Cancel Reservation</a>
+{#                            <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 btn btn-light btn-sm px-2 gap-3"#}
+{#                               href="/Course_reservation/Cancel_Course?code={{ Course_reservation.Course_code }}&cancel=True">Cancel Reservation</a>#}
                         </td>
                     </tr>
                 {% endfor %}

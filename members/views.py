@@ -5,6 +5,42 @@ from django.template import loader
 from .models import Member
 from .forms import SurveyForm
 
+def master_html(request):
+    master = "master.html"
+    if (request.user.username[:4] == "v2-1"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v2-2"):
+        master = 'master_v2_2.html'
+    elif (request.user.username[:4] == "v3-1"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v3-2"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v4-1"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v4-2"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v5-1"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v5-2"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v6-1"):
+        master = 'master_v6_1.html'
+    elif (request.user.username[:4] == "v6-2"):
+        master = 'master_v6_2.html'
+    elif (request.user.username[:4] == "v7-1"):
+        master = 'master_v7_1.html'
+    elif (request.user.username[:4] == "v7-2"):
+        master = 'master_v7_2.html'
+    elif (request.user.username[:4] == "v8-1"):
+        master = 'master_v8_1.html'
+    elif (request.user.username[:4] == "v8-2"):
+        master = 'master_v8_2.html'
+    elif (request.user.username[:4] == "v9-1"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v9-2"):
+        master = 'master_v2_1.html'
+    return master;
+
 def survey_view(request):
     if request.method == 'POST':
         form = SurveyForm(request.POST)
@@ -49,10 +85,16 @@ def remind_v1_2(request):
     template = loader.get_template('remind_v1_2.html')
     return HttpResponse(template.render())
 
+
+
 def main(request):
     print ('main is called')
-    template = loader.get_template('main.html')
-    return HttpResponse(template.render())
+
+    master = master_html(request)
+
+    context = {'master': master}
+    template = 'main.html'
+    return render(request, template, context)
 
 
 

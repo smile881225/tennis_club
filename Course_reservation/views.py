@@ -11,8 +11,62 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from django.db.models import Q  # 引入 Q 對象，用於複合查詢
 
+
+def master_html(request):
+    master = "master.html"
+    if (request.user.username[:4] == "v2-1"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v2-2"):
+        master = 'master_v2_2.html'
+    elif (request.user.username[:4] == "v3-1"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v3-2"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v4-1"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v4-2"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v5-1"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v5-2"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v6-1"):
+        master = 'master_v6_1.html'
+    elif (request.user.username[:4] == "v6-2"):
+        master = 'master_v6_2.html'
+    elif (request.user.username[:4] == "v7-1"):
+        master = 'master_v7_1.html'
+    elif (request.user.username[:4] == "v7-2"):
+        master = 'master_v7_2.html'
+    elif (request.user.username[:4] == "v8-1"):
+        master = 'master_v8_1.html'
+    elif (request.user.username[:4] == "v8-2"):
+        master = 'master_v8_2.html'
+    elif (request.user.username[:4] == "v9-1"):
+        master = 'master_v2_1.html'
+    elif (request.user.username[:4] == "v9-2"):
+        master = 'master_v2_1.html'
+    return master;
+
+# 課程總攬頁面
 def index(request):
-    template = loader.get_template('Course_reservation.html')
+    master = master_html(request)
+    if (request.user.username[:4] == "v2-1"):
+        template = loader.get_template('Course_reservation_v2_1.html')
+    elif (request.user.username[:4] == "v2-2"):
+        template = loader.get_template('Course_reservation_v2_2.html')
+    elif (request.user.username[:4] == "v3-1"):
+        template = loader.get_template('Course_reservation_v2_1.html')
+    elif (request.user.username[:4] == "v8-2"):
+        template = loader.get_template('Course_reservation_v8_2.html')
+    elif (request.user.username[:4] == "v9-1"):
+        template = loader.get_template('Course_reservation_v2_2.html')
+    elif (request.user.username[:4] == "v9-2"):
+        template = loader.get_template('Course_reservation_v2_2.html')
+    # elif (request.user.username[:4] == "v2-2"):
+    #     template = loader.get_template('Course_content_v2_2.html')
+    else:
+        template = loader.get_template('Course_reservation_v2_1.html')
     Course_reservation_list = Course_reservation.objects.all()
     # 使用 distinct() 方法查询所有不重复的商品名称
     Period_list = Course_reservation.objects.values_list('Period', flat=True).distinct()
@@ -31,6 +85,7 @@ def index(request):
         'Period_list': Period_list,
         'Course_code_list': Course_code_list,
         'Category_list': Category_list,
+        'master': master
     }
 
     return HttpResponse(template.render(context, request))
@@ -43,12 +98,21 @@ def test_2(request):
 
 
 def Course_content(request):
+    master = master_html(request)
     if (request.user.username[:4] == "v3-2"):
         template = loader.get_template('Course_content_v3_2.html')
     elif (request.user.username[:4] == "v4-2"):
         template = loader.get_template('Course_content_v4_2.html')
     elif (request.user.username[:4] == "v5-2"):
-        template = loader.get_template('Course_content_v2_2.html')
+        template = loader.get_template('Course_content_v5_2.html')
+    elif (request.user.username[:4] == "v6-1"):
+        template = loader.get_template('Course_content_v7_1.html')
+    elif (request.user.username[:4] == "v6-2"):
+        template = loader.get_template('Course_content_v7_1.html')
+    elif (request.user.username[:4] == "v7-1"):
+        template = loader.get_template('Course_content_v7_1.html')
+    elif (request.user.username[:4] == "v7-2"):
+        template = loader.get_template('Course_content_v7_1.html')
     else:
         template = loader.get_template('Course_content.html')
 
@@ -66,13 +130,15 @@ def Course_content(request):
         for i in data:
             print(i)
         context = {
-            "Course": data
+            "Course": data,
+            'master': master
         }
         return HttpResponse(template.render(context))
     except:
         urid = None
         context = {
-            "Course": data
+            "Course": data,
+            'master': master
         }
         return HttpResponse(template.render(context))
 
@@ -96,24 +162,33 @@ def third_stage(request):
 
 # 預約結果頁面
 def Course_reservation_result(request):
+        master = master_html(request)
         if (request.user.username[:4] == "v2-1"):
             template = loader.get_template('Reservation_v2.html')
         elif (request.user.username[:4] == "v2-2"):
             template = loader.get_template('Reservation_v2.html')
+        elif (request.user.username[:4] == "v8-2"):
+            template = loader.get_template('Course_reservation_v8_2.html')
+            return redirect('/Course_reservation/')
+        elif (request.user.username[:4] == "v9-2"):
+            template = loader.get_template('Reservation_v9_2.html')
         else:
             template = loader.get_template('Reservation.html')
 
+        master=master_html(request)
         # 篩選有完成預約的人
         reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="Appointment Confirmed")
 
         context = {
             "Course": reservationData,
+            'master': master
         }
         return HttpResponse(template.render(context))
 
 # 預約課程
 def CourseReservation(request):
     template = loader.get_template('Course_reservation_result.html')
+    master = master_html(request)
 
     data = {}
     msg = ""
@@ -145,19 +220,24 @@ def CourseReservation(request):
 
         # 檢查是否有衝堂
         conflicts = Course_reservation_history.objects.filter(
+            Student_id=request.user, # 自己的id
             week=CourseData.week,  # 先比對星期
-            State='Appointment Confirmed',  # 並且狀態為CCC
+            State='Appointment Confirmed',  # 並且狀態為 Appointment Confirmed
             class_time_start__lt=CourseData.class_time_end,
             class_time_end__gt= CourseData.class_time_start
         ).exclude(
             # Q(Course_code=CourseData.Course_code) & Q(State='Cancelled')  # 複合查詢，排除課程代碼為DD且狀態為cancel的紀錄
             Course_code=CourseData.Course_code
-        ).exists()
+        )
 
-        if conflicts:
+        if conflicts.exists():
             print("課程時間衝突，請選擇其他時間。")
+            print("我想預約的課程是：" + CourseData.Course_code + " 星期： "+str(CourseData.week)+"，時間:" + str(CourseData.class_time_start) + " - " + str(CourseData.class_time_end))
+            for conflict in conflicts:
+                print(f"衝突課程: {conflict.Course_code}，星期： {conflict.week} 時間: {conflict.class_time_start} - {conflict.class_time_end}")
             context = {
-                "msg" : "Appointment failed, course time conflict"
+                "msg" : "Appointment failed, course time conflict",
+                "master":master
             }
             return HttpResponse(template.render(context))
         else:
@@ -198,7 +278,8 @@ def CourseReservation(request):
         # 篩選完放到context裡面
         context = {
             "Course": reservationData,
-            "msg" : "Appointment successful"
+            "msg" : "Appointment successful",
+            "master": master
             # "msg": msg
         }
         return HttpResponse(template.render(context))
@@ -207,13 +288,19 @@ def CourseReservation(request):
         reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="Appointment Confirmed")
         context = {
             "Course": reservationData,
+            "master": master
             # "msg": msg
         }
         return HttpResponse(template.render(context))
 
 # 取消預約課程
 def Cancel_Course(request):
-    template = loader.get_template('Reservation.html')
+    if (request.user.username[:4] == "v9-2"):
+        template = loader.get_template('Reservation_v9_2.html')
+    else:
+        template = loader.get_template('Reservation.html')
+    master = master_html(request)
+
     data = {}
     # msg = ""
     cancel = False
@@ -232,6 +319,7 @@ def Cancel_Course(request):
                                                                         State="Appointment Confirmed")
             context = {
                 "Course": reservationData,
+                'master': master
                 # "msg" : "Appointment Limit Reached"
             }
             # print(context["msg"])
@@ -257,6 +345,7 @@ def Cancel_Course(request):
         # 篩選完放到context裡面
         context = {
             "Course": reservationData,
+            'master': master
             # "msg": msg
         }
         return HttpResponse(template.render(context))
@@ -266,18 +355,22 @@ def Cancel_Course(request):
                                                                     State="Appointment Confirmed")
         context = {
             "Course": reservationData,
+            'master': master
             # "msg": msg
         }
         return HttpResponse(template.render(context))
 
 
 def Course_search(request):
+    master = master_html(request)
+    cls = 'd-none'
     if (request.user.username[:4] == "v7-1"):
         template = loader.get_template('Course_search_v7_1.html')
     elif (request.user.username[:4] == "v7-2"):
         template = loader.get_template('Course_search_v7_2.html')
     else:
         template = loader.get_template('Course_search.html')
+
     Course_reservation_list = Course_reservation.objects.all()
     # 使用 distinct() 方法查询所有不重复的商品名称
     Period_list = Course_reservation.objects.values_list('Period', flat=True).distinct()
@@ -289,13 +382,15 @@ def Course_search(request):
 
     if request.method == "POST":
         course_reservation_Filter = Course_reservation_Filter(request.POST, queryset=Course_reservation_list)
-
+        cls = ''
     context = {
         'Course_reservation_list': Course_reservation_list,
         'course_reservation_Filter': course_reservation_Filter,
         'Period_list': Period_list,
         'Course_code_list': Course_code_list,
         'Category_list': Category_list,
+        'master': master,
+        'cls':cls
     }
 
     return HttpResponse(template.render(context, request))
@@ -304,40 +399,21 @@ def Course_search(request):
 # 取消預約確認頁面
 def Course_Clear_check(request):
         reservationData = Course_reservation_history.objects.filter(Student_id=request.user, State="Appointment Confirmed")
+        master = master_html(request)
         context = {
             "Course": reservationData,
+            'master': master
         }
         return render(request, 'Course_Clear_check.html', context)
 
-
-
-#
-# def Course_Clear(request):
-#     if request.method == 'POST':
-#         # 更新所有狀態為 "Appointment Confirmed" 的預約記錄為 "Cancelled"
-#         Course_reservation_history.objects.filter(State="Appointment Confirmed").update(State="Cancelled")
-#
-#         # 更新對應課程的人數
-#         confirmed_reservations = Course_reservation_history.objects.filter(State="Cancelled")
-#         for reservation in confirmed_reservations:
-#             course = Course_reservation.objects.filter(Course_code=reservation.Course_code).first()
-#             if course:
-#                 course.Current_number_applicants = course.Current_number_applicants - 1
-#                 course.save()
-#         # 篩選有完成預約的人
-#         reservationData = Course_reservation_history.objects.filter(Student_id=request.user,State="Appointment Confirmed")
-#         # 篩選完放到context裡面
-#         context = {
-#             "Course": reservationData,
-#             # "msg": msg
-#         }
-#         # 重定向回 index 頁面
-#         return redirect('index')
-#
-#     # 加載 Course_reservation.html 頁面
-#     return render(request, 'Course_reservation.html')
-
 def Course_Clear(request):
+    if (request.user.username[:4] == "v8-2"):
+        template = loader.get_template('Course_reservation_v8_2.html')
+    elif (request.user.username[:4] == "v9-2"):
+        template = loader.get_template('Reservation_v9_2.html')
+    else :
+        template = loader.get_template('Reservation.html')
+    master = master_html(request)
     if request.method == 'POST':
 
         # 更新對應課程的人數
@@ -352,14 +428,26 @@ def Course_Clear(request):
         # 更新所有狀態為 "Appointment Confirmed" 的預約記錄為 "Cancelled"
         Course_reservation_history.objects.filter(State="Appointment Confirmed").update(State="Cancelled")
 
-        # 重定向回 index 頁面
-        return redirect('index')
-
-    else:
         # 顯示確認頁面
-        reservationData = Course_reservation_history.objects.filter(Student_id=request.user,
-                                                                    State="Appointment Confirmed")
+        reservationData = Course_reservation_history.objects.filter(Student_id=request.user,State="Appointment Confirmed")
+
         context = {
-            "Course": reservationData,
-        }
-        return render(request, 'Course_cancel.html', context)
+                "Course": reservationData,
+                'master': master
+            }
+        if (request.user.username[:4] == "v8-2"):
+            return redirect('/Course_reservation/')
+        else:
+            return HttpResponse(template.render(context))
+        # 重定向回 index 頁面
+        # return render(request, 'Course_cancel.html', context)
+
+    # else:
+    #     # 顯示確認頁面
+    #     reservationData = Course_reservation_history.objects.filter(Student_id=request.user,
+    #                                                                 State="Appointment Confirmed")
+    #     context = {
+    #         "Course": reservationData,
+    #         'master': master
+    #     }
+    #     return render(request, 'Course_cancel.html', context)

@@ -21,17 +21,17 @@ My Tennis Club - List of all members
                     <br>
                     Classroom：{{ Course_reservation.Classroom }}
                     <br>
-                    {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}
+                    {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
 
-                    <br>
-                    Maximum Class Size：{{ Course_reservation.Full_number_applicants }}
+{#                    <br>#}
+{#                    Maximum Class Size：{{ Course_reservation.Full_number_applicants }}#}
                     <br>
                     Current Enrollment：{{ Course_reservation.Current_number_applicants }}
                     <br>
 {#                    <a class="mt-2 nav-link btn btn-light"#}
                      <a class="mt-2 btn btn-light btn-sm px-2 gap-3" style="opacity: 0.5;"
 {#                     <a class="mt-2 btn btn-sm px-2 gap-3 btn-primary"#}
-                        href="/Course_reservation/">Return</a>
+                        href="/Course_reservation/Course_search/">Return</a>
                     <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 btn btn-sm px-2 gap-3 btn-primary"
 {#                    <a class="mt-2 btn btn-light btn-sm px-2 gap-3" style="opacity: 0.5;"#}
                         href="Coursereservation?code={{ Course_reservation.Course_code }}">Confirm</a>

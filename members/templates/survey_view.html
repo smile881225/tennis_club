@@ -35,51 +35,53 @@
 
 {% block content %}
     <div class="container">
-        <form method="post">
-            {% csrf_token %}
-            <table class="mb-3">
-                <tr>
-                    <th style="padding:17px;">問題</th>
-                    <th> 1</th>
-                    <th> 2</th>
-                    <th> 3</th>
-                    <th> 4</th>
-                    <th> 5</th>
-                </tr>
-                {% for field in form %}
-                    {% if field.name != 'student_id' and forloop.revcounter > 3 %}
-                        <tr>
-                            <td style="text-align: start;">{{ field.label }}</td>
-                            {% for choice in field %}
-                                {% if not forloop.first %}
-                                    <td>
-                                        <label>
-                                            {{ choice }}
-                                        </label>
-                                    </td>
-                                {% endif %}
-                            {% endfor %}
-                        </tr>
-                    {% endif %}
-                    {% if forloop.revcounter <= 3 %}
-                        <tr style="">
-                            <td style="text-align: start;">{{ field.label }}</td>
-                            <td style="height: 130px;" colspan="5">{{ field }}</td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-            </table>
-            <div class="d-flex justify-content-center align-items-center">
-                <div class="me-4">
-                    {% for field in form %}
-                        {% if forloop.first %}
-                            {{ field.label }}：
-                            {{ field }}
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                <button type="submit" class="btn btn-primary" style="float: right;">提交問卷</button>
-            </div>
-        </form>
+{#        <form method="post">#}
+{#            {% csrf_token %}#}
+{#            <table class="mb-3">#}
+{#                <tr>#}
+{#                    <th style="padding:17px;">問題</th>#}
+{#                    <th> 1</th>#}
+{#                    <th> 2</th>#}
+{#                    <th> 3</th>#}
+{#                    <th> 4</th>#}
+{#                    <th> 5</th>#}
+{#                </tr>#}
+{#                {% for field in form %}#}
+{#                    {% if field.name != 'student_id' and forloop.revcounter > 3 %}#}
+{#                        <tr>#}
+{#                            <td style="text-align: start;">{{ field.label }}</td>#}
+{#                            {% for choice in field %}#}
+{#                                {% if not forloop.first %}#}
+{#                                    <td>#}
+{#                                        <label>#}
+{#                                            {{ choice }}#}
+{#                                        </label>#}
+{#                                    </td>#}
+{#                                {% endif %}#}
+{#                            {% endfor %}#}
+{#                        </tr>#}
+{#                    {% endif %}#}
+{#                    {% if forloop.revcounter <= 3 %}#}
+{#                        <tr style="">#}
+{#                            <td style="text-align: start;">{{ field.label }}</td>#}
+{#                            <td style="height: 130px;" colspan="5">{{ field }}</td>#}
+{#                        </tr>#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+{#            </table>#}
+{#            <div class="d-flex justify-content-center align-items-center">#}
+{#                <div class="me-4">#}
+{#                    {% for field in form %}#}
+{#                        {% if forloop.first %}#}
+{#                            {{ field.label }}：#}
+{#                            {{ field }}#}
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#                <button type="submit" class="btn btn-primary" style="float: right;">提交問卷</button>#}
+{#            </div>#}
+{#        </form>#}
+        <a href="https://forms.gle/XzbXhtgZkUd2STho7"></a>
+{#    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSezcHPFMwlLq6MybPEk6GoTTB377DuZQF6xGPoDXed09u2-Hg/viewform?embedded=true" width="640" height="3094" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>#}
     </div>
 {% endblock %}

@@ -18,6 +18,7 @@ def login(request):
             'login_form': login_form,
         }
         return render(request, 'login.html', context)
+
     elif request.method == "POST":
 
         login_form = LoginForm(request.POST)
@@ -72,12 +73,18 @@ def login(request):
                     elif username[:4] == "v7-2":
                         print("v7-2")
                         return render(request, 'main_v7_2.html', context)
+                    elif username[:4] == "v8-1":
+                        print("v8-2")
+                        return render(request, 'main_v8_1.html', context)
                     elif username[:4] == "v8-2":
                         print("v8-2")
                         return render(request, 'main_v8_2.html', context)
-                    elif username[:4] == "v8-2":
-                        print("v8-2")
-                        return render(request, 'main_v8_2.html', context)
+                    elif username[:4] == "v9-1":
+                        print("v9-1")
+                        return render(request, 'main_v2_1.html', context)
+                    elif username[:4] == "v9-2":
+                        print("v9-2")
+                        return render(request, 'main_v2_2.html', context)
                 else:
                     err_login_msg = 'Login failed (user id/passworld not correct)'
         else:
@@ -100,6 +107,7 @@ def login_v1_2(request):
             'login_form': login_form,
         }
         return render(request, 'login.html', context)
+
     elif request.method == "POST":
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
@@ -119,7 +127,11 @@ def login_v1_2(request):
                     return render(request, 'main.html',context)
                 if username[:4] == "v2-2":
                     return render(request, 'main.html',context)
-        return redirect('login_v1_2')  # 重定向到問卷頁面
+            # login fail
+            context = {'login_form': login_form,
+                       'err_login_msg': ''}
+        return render(request, 'login.html', context)
+        # return redirect('login_v1_2')  # 重定向
 
 
 
