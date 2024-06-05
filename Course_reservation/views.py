@@ -56,17 +56,17 @@ def index(request):
     elif (request.user.username[:4] == "v2-2"):
         template = loader.get_template('Course_reservation_v2_2.html')
     elif (request.user.username[:4] == "v3-1"):
-        template = loader.get_template('Course_reservation_v2_1.html')
+        template = loader.get_template('Course_reservation_v2_2.html')
     elif (request.user.username[:4] == "v8-2"):
         template = loader.get_template('Course_reservation_v8_2.html')
     elif (request.user.username[:4] == "v9-1"):
-        template = loader.get_template('Course_reservation_v2_2.html')
+        template = loader.get_template('Course_reservation_v2_1.html')
     elif (request.user.username[:4] == "v9-2"):
-        template = loader.get_template('Course_reservation_v2_2.html')
+        template = loader.get_template('Course_reservation_v2_1.html')
     # elif (request.user.username[:4] == "v2-2"):
     #     template = loader.get_template('Course_content_v2_2.html')
     else:
-        template = loader.get_template('Course_reservation_v2_1.html')
+        template = loader.get_template('Course_reservation_v2_2.html')
     Course_reservation_list = Course_reservation.objects.all()
     # 使用 distinct() 方法查询所有不重复的商品名称
     Period_list = Course_reservation.objects.values_list('Period', flat=True).distinct()

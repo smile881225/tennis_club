@@ -1,0 +1,47 @@
+{% extends master %}
+
+{% block title %}
+My Tennis Club - List of all members
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid p-5 pt-3">
+    <h3 class="text-success">Course Content check</h3>
+    <td width="10%" class="p-0">
+        <table class="table">
+            {% for Course_reservation in Course %}
+            <tr>
+                <td>
+                    Session：{{ Course_reservation.Period }}<br>
+                    Coach：{{ Course_reservation.Coach_name }}<br>
+                    Level：{{ Course_reservation.Category }}
+                    <br>
+                    Code：{{ Course_reservation.Course_code }}
+                    <br>
+                    Classroom：{{ Course_reservation.Classroom }}
+                    <br>
+                    {{ Course_reservation.Time_start }}~{{ Course_reservation.Time_end }}<br>
+
+{#                    <br>#}
+{#                    Maximum Class Size：{{ Course_reservation.Full_number_applicants }}#}
+                    <br>
+                    Current Enrollment：{{ Course_reservation.Current_number_applicants }}
+                    <br>
+{#                    <a class="mt-2 nav-link btn btn-light"#}
+                     <a class="mt-2 btn btn-light btn-sm px-2 gap-3" style="opacity: 0.5;"
+{#                     <a class="mt-2 btn btn-sm px-2 gap-3 btn-primary"#}
+                        href="/Course_reservation/">Return</a>
+                    <a id="{{ Course_reservation.Course_code }}_Course_Reservation" class="mt-2 btn btn-sm px-2 gap-3 btn-primary"
+{#                    <a class="mt-2 btn btn-light btn-sm px-2 gap-3" style="opacity: 0.5;"#}
+                        href="Coursereservation?code={{ Course_reservation.Course_code }}">Confirm</a>
+{#                                            <input class="nav-link btn btn-light" type='submit' value='Reservation'>#}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </td>
+</div>
+
+
+{% endblock %}

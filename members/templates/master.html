@@ -31,17 +31,17 @@
 {#        <a class="nav-link" href="/admin">後台管理</a>#}
 {#      </li>#}
         {#登入按鈕判斷#}
-      {% if user.is_authenticated %}
+{#      {% if user.is_authenticated %}#}
         <li class="nav-item">
-            <a id="Logout"  class="nav-link" href="{% url 'logout' %}">Logout ({{ user }}) </a>
+            <a id="Logout"  class="nav-link" href="{% url 'logout' %}">Logout  </a>
 {#            <a class="nav-link" href="{% url 'logout' %}">登出 ({{ user }}) </a>#}
         </li>
-      {% else %}
-        <li class="nav-item">
-            <a id="Login"  class="nav-link" href="{% url 'login' %}">Login</a>
+{#      {% else %}#}
+{#        <li class="nav-item">#}
+{#            <a id="Login"  class="nav-link" href="{% url 'login' %}">Login</a>#}
 {#            <a class="nav-link" href="{% url 'login' %}">登入</a>#}
-        </li>
-      {% endif %}
+{#        </li>#}
+{#      {% endif %}#}
 
      <li class="nav-item">
         <a id="Course Overview" class="nav-link" href="/Course_reservation/">Course Overview</a>
