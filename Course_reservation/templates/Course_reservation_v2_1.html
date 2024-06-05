@@ -13,7 +13,7 @@
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger ">Clear All Reservation</button>
             </form>
-             
+
         </h3>
         {% for Course_reservation in Course_reservation_list %}
             <form name='my form' action='Course_content/' method='GET'>
