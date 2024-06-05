@@ -31,7 +31,7 @@ My Tennis Club - List of all members
                     <tr>
                         <form name='my form' action='Course_content/' method='GET'>
                             {% if Course_reservation.week == "Monday" %}
-                            <td>
+                            <td {% if Course_reservation.Course_code in reserved_course_codes %}style="color: crimson"{% endif %} >
                                 Session：{{ Course_reservation.Period }}<br>
                                 Coach：{{ Course_reservation.Coach_name }}<br>
                                 Level：{{ Course_reservation.Category }} <br>
@@ -59,7 +59,7 @@ My Tennis Club - List of all members
                     {% for Course_reservation in Course_reservation_list %}
                         <tr>
                             {% if Course_reservation.week == "Tuesday" %}
-                            <td>
+                            <td {% if Course_reservation.Course_code in reserved_course_codes %}style="color: crimson"{% endif %} >
                                 Session：{{ Course_reservation.Period }}<br>
                                 Coach：{{ Course_reservation.Coach_name }}<br>
                                 Level：{{ Course_reservation.Category }} <br>
@@ -86,7 +86,7 @@ My Tennis Club - List of all members
                     {% for Course_reservation in Course_reservation_list %}
                         <tr>
                             {% if Course_reservation.week == "Wednesday" %}
-                            <td>
+                            <td {% if Course_reservation.Course_code in reserved_course_codes %}style="color: crimson"{% endif %} >
                                 Session：{{ Course_reservation.Period }}<br>
                                 Coach：{{ Course_reservation.Coach_name }}<br>
                                 Level：{{ Course_reservation.Category }} <br>
@@ -115,7 +115,7 @@ My Tennis Club - List of all members
                     {% for Course_reservation in Course_reservation_list %}
                         <tr>
                             {% if Course_reservation.week == "Thursday" %}
-                            <td>
+                            <td {% if Course_reservation.Course_code in reserved_course_codes %}style="color: crimson"{% endif %} >
                                 Session：{{ Course_reservation.Period }}<br>
                                 Coach：{{ Course_reservation.Coach_name }}<br>
                                 Level：{{ Course_reservation.Category }}
@@ -147,7 +147,7 @@ My Tennis Club - List of all members
                     {% for Course_reservation in Course_reservation_list %}
                         <tr>
                             {% if Course_reservation.week == "Friday" %}
-                            <td>
+                            <td {% if Course_reservation.Course_code in reserved_course_codes %}style="color: crimson"{% endif %} >
                                 Session：{{ Course_reservation.Period }}<br>
                                 Coach：{{ Course_reservation.Coach_name }}<br>
                                 Level：{{ Course_reservation.Category }}

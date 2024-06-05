@@ -17,7 +17,7 @@
         </h3>
         {% for Course_reservation in Course_reservation_list %}
             <form name='my form' action='Course_content/' method='GET'>
-                <td>
+                <td {% if Course_reservation.Course_code in reserved_course_codes %}style="color: crimson"{% endif %}>
                     Session：{{ Course_reservation.Period }}<br>
                     Coach：{{ Course_reservation.Coach_name }}<br>
                     Level：{{ Course_reservation.Category }} <br>

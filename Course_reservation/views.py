@@ -73,6 +73,8 @@ def index(request):
     Course_code_list = Course_reservation.objects.values_list('Course_code', flat=True).distinct()
     Category_list = Course_reservation.objects.values_list('Category', flat=True).distinct()
 
+    reserved_course_codes = Course_reservation_history.objects.filter(Student_id=request.user.username, State="Appointment Confirmed").values_list('Course_code', flat=True)
+
     # 過濾用
     course_reservation_Filter = Course_reservation_Filter(queryset=Course_reservation_list)
 
@@ -85,7 +87,9 @@ def index(request):
         'Period_list': Period_list,
         'Course_code_list': Course_code_list,
         'Category_list': Category_list,
-        'master': master
+        'master': master,
+        'have_Reservation': 'color: crimson',
+        'reserved_course_codes': reserved_course_codes,
     }
 
     return HttpResponse(template.render(context, request))
