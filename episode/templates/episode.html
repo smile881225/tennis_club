@@ -1,0 +1,17 @@
+{% extends "practice_master.html" %}
+
+
+{% block title %}
+  {{ ep }}
+{% endblock %}
+
+{% block content %}
+  <h4> {{ ep }} </h3>
+
+  <h6> English Plot </h2>  
+  <p> {{ ep.eng_plot }}</p>
+
+  <h6> 中文簡介 </h2>  
+  <p> {{ ep.tw_plot }}</p>
+  
+{% endblock %}

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'courts',
     'Course_reservation',
     'django_filters',
+    'episode'
 ]
 
 MIDDLEWARE = [

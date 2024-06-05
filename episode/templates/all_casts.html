@@ -1,0 +1,22 @@
+{% extends "practice_master.html" %}
+
+{% block title %}
+  Main Casts
+{% endblock %}
+
+
+{% block content %}
+
+  <h3>Casts</h3>
+
+    {% for c in casts %}
+
+      <img class='img_cast' src="{{ c.img_url }}" width="150">
+
+      <p><strong>Casts {{ c.name }}</strong>: 
+      {{ c.introduction }} </p>
+    
+        
+    {% endfor %}
+
+{% endblock %}
