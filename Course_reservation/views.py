@@ -92,6 +92,7 @@ def index(request):
         'reserved_course_codes': reserved_course_codes,
     }
 
+
     return HttpResponse(template.render(context, request))
 
 
@@ -384,6 +385,9 @@ def Course_search(request):
     # 過濾用
     course_reservation_Filter = Course_reservation_Filter(queryset=Course_reservation_list)
 
+    reserved_course_codes = Course_reservation_history.objects.filter(Student_id=request.user.username, State="Appointment Confirmed").values_list('Course_code', flat=True)
+
+
     if request.method == "POST":
         course_reservation_Filter = Course_reservation_Filter(request.POST, queryset=Course_reservation_list)
         cls = ''
@@ -394,7 +398,8 @@ def Course_search(request):
         'Course_code_list': Course_code_list,
         'Category_list': Category_list,
         'master': master,
-        'cls':cls
+        'cls':cls,
+        'reserved_course_codes': reserved_course_codes,
     }
 
     return HttpResponse(template.render(context, request))
@@ -409,6 +414,30 @@ def Course_Clear_check(request):
             'master': master
         }
         return render(request, 'Course_Clear_check.html', context)
+
+
+def confirm_submission(request):
+    user = request.user
+    master_courses = Course_reservation_history.objects.filter(
+        Student_id=user.id,
+        State="Appointment Confirmed"
+    ).filter(
+        Period__regex=r'^.{6}Master'
+    )
+
+    other_courses = Course_reservation_history.objects.filter(
+        Student_id=user.id,
+        State="Appointment Confirmed"
+    ).exclude(
+        Period__regex=r'^.{6}Master'
+    )
+    master = master_html(request)
+    # if master_courses.count() == 5 and not other_courses.exists():
+    if master_courses.count() > 4 and not other_courses.exists():
+        return redirect("https://forms.gle/XzbXhtgZkUd2STho7")
+    else:
+        return render(request, 'result_check.html',
+                      {'msg': 'Task conditions not met','master':master})
 
 def Course_Clear(request):
     if (request.user.username[:4] == "v8-2"):

@@ -14,4 +14,5 @@ urlpatterns = [
     path('Course_Clear_check/', views.Course_Clear_check, name='Course_Clear_check'),
     path('Course_Clear/', views.Course_Clear, name='Course_Clear'),
     path('Coursereservation/Course_reservation_result/', views.Course_reservation_result, name='Course_reservation_result'),
+    path('confirm_submission/', views.confirm_submission, name='confirm_submission'),
 ]

@@ -1,0 +1,36 @@
+{% extends master %}
+
+{% block title %}
+    My Tennis Club - List of all members
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid p-5 pt-3">
+        <h3 class="text-success">Course Reservation Result</h3>
+        <td width="10%" class="p-0">
+            <table class="table">
+                <tr>
+                    <td>
+
+                        {% if msg == "Appointment successful" %}
+                            <h1 class="alert alert-success">
+                                {{ msg }}
+                                <br>
+
+                            </h1>
+
+                        {% else %}
+                             <h1 class="alert alert-danger">
+                                 {{ msg }}
+                                <br class="mt-2">
+                            </h1>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </div>
+
+
+{% endblock %}

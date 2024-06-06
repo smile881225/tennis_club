@@ -9,7 +9,12 @@
 {% block content %}
     <div class="container-fluid p-5 pt-3">
         <h3 class="text-success">Course search</h3>
+    <form method="POST" action="{% url 'Course_Clear_check' %}" style="float: right;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger ">Clear All Reservation</button>
+            </form>
         <form id="searchForm" method='POST'>
+
             {% csrf_token %}
             Session：{{ course_reservation_Filter.form.Period }}
             Code：{{ course_reservation_Filter.form.Course_code }}
@@ -35,7 +40,7 @@
             </thead>
             <tbody>
             {% for course_reservation in course_reservation_Filter.qs|dictsort:"class_time_start" %}
-                <tr>
+                <tr  {% if Course_reservation.Course_code in reserved_course_codes %}style="color: crimson"{% endif %} >
                     <td>{{ course_reservation.Period }}</td>
                     <td>{{ course_reservation.Course_code }}</td>
                     <td>{{ course_reservation.Category }}</td>
